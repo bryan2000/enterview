@@ -1,0 +1,264 @@
+
+
+<div class="container mbl main">
+
+
+    <img *ngIf="selectedstyle" height="50" [src]="selectedstyle.img">
+
+
+
+    <br>
+    <hr>
+
+    <div id="divitementer">
+
+
+        <div class="row">
+        <mat-form-field class="col-md-2">
+            
+               <mat-select placeholder="Style Code" [(value)]="selectedstyle" >
+                 <mat-option>--</mat-option>
+                 <mat-option *ngFor="let style of filterStyles | async " [value]="style"  (onSelectionChange)="styleselected($event,style)">
+                       <img class="example-option-img" aria-hidden [src]="style.img" height="25">
+                       <span>{{style.name}}--</span>
+                    
+                     </mat-option>
+               </mat-select>
+        </mat-form-field>
+        <mat-form-field class=" col-md-6">
+            
+           <input #inpt matInput aria-label="Item" placeholder="Cabinet Entrance" [matAutocomplete]="oneauto"
+           [formControl]="stockItemControl"  (keyup.enter)="stockItemSearchClick()">
+           <button  type="button" mat-button color="primary" mat-icon-button matSuffix 
+           (click)="clearStockItem()"  >
+                   <mat-icon>clear</mat-icon>
+          </button>
+             
+           <mat-autocomplete autoActiveFirstOption #oneauto="matAutocomplete"
+           [displayWith]="displayNull"
+           >
+               <mat-option *ngFor="let sitem of filteredStockItems | async" [value]="sitem.code"
+         (onSelectionChange)="stockItemSelected($event,sitem)"
+               >
+                       <img class="example-option-img" aria-hidden [src]="getStyleImg(sitem.stylecode)" height="45">
+                  <span>{{sitem.stylecode}}-{{sitem.code}}
+                       <span [ngSwitch]="sitem?.stock">
+                               <b *ngSwitchCase="'inStock'" class="text-success">{{sitem.stock}}</b>               
+                               <b *ngSwitchCase="'Low'" class="text-warning">{{sitem.stock}}</b>               
+                               <b *ngSwitchCase="'Out'" class="text-danger">{{sitem.stock}}</b>               
+                       </span>
+                  </span>
+               </mat-option>
+           </mat-autocomplete>
+        <input matInput #inptclr matSuffix style="width: 1px;"/>       
+          <mat-checkbox  [(ngModel)]="fullkd" matSuffix>
+          {{fullkd?'KD':'ASSM'}}
+          </mat-checkbox>     
+ 
+        </mat-form-field>
+       
+   
+       
+        </div>
+  
+   
+       
+       
+       <div class="row ">
+            
+          <div class="col-md-2">
+              <mat-checkbox  [(ngModel)]="displayprice"> Price </mat-checkbox>
+           </div> 
+            <div class="col-md-2" >   
+              <mat-checkbox [(ngModel)]="displaydescr"> Description</mat-checkbox>  
+            </div>   
+            <div class="col-md-3">
+             <b class="text-danger">{{errtxt}}</b>
+            </div>   
+       </div>
+
+       <div class="row">
+            <div id="thirdTap" class="col-md-9 border-top border-secondary rounded-top divdetails " id="itemdetail" >
+        
+                <table class="table table-sm table-hover ">
+                <thead class="thead-light">
+                    <tr>
+                            <th scope="col">#</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Style ({{quotsummary.styles}})</th>
+                        <th scope="col">ITEM</th>
+                        <th scope="col">L/R</th>
+                        <th scope="col">KD</th>
+                        <th scope="col">
+                            <span *ngIf="displayprice">PRICE</span>
+                        </th>            
+                        <th scope="col">
+                            Amount
+                        </th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">
+                            <span *ngIf="displaydescr">DESCR</span>
+                        </th>
+                            <th scope="col"></th>      
+                            <th scope="col">SEQU</th>           
+                    </tr>
+                </thead>
+                <tbody>
+            
+                <tr *ngFor="let quitem of filteredQuoItems | async ; let i=index">
+                <td>{{i}}</td>
+                        
+                        <td>
+                                <div class="input-group input-group-rounded float-left">
+                    
+                                        <input type="number" max="99" min="1" class="form-control flat font-weight-bold input-sm"
+                                        [(ngModel)]="quitem.qty" 
+                                        (keyup)="kdChanged()" (change)="kdChanged()"
+                                        />
+                    
+                            </div>
+                        </td>
+                        <td>
+                            <img class="example-option-img" aria-hidden [src]="getStyleImg(quitem.stylecode)" height="25">
+                            <span>{{quitem.stylecode}}</span>
+                        </td>
+                        <td><b data-toggle="tooltip" title="item.descr">{{quitem.code}} </b></td>
+                        <td>
+                            <span *ngIf="quitem.rqside">
+                        
+                            <mat-slide-toggle
+                            [checked]="quitem.side.toLowerCase()==='right'"
+                            (change)="slidetoggle(quitem)">
+                            {{quitem.side |uppercase}}
+                            </mat-slide-toggle>
+                            </span>
+                        </td>
+            
+            
+                        <td>
+                            <span *ngIf="quitem.rqkd">
+                                    <mat-checkbox (click)="kdChanged()"
+                                    [(ngModel)]="quitem.kd">
+                                        {{quitem.kd?'KD':'ASSM'}}
+                                    </mat-checkbox>        
+                                </span>
+                            </td>
+                            <td >
+                                <span *ngIf="displayprice">
+                                <b> {{(quitem.kd? quitem.price2 : quitem.price) | currency}}</b>                               
+     
+                                </span>                 
+                            </td>  
+                            <td>   
+                                <span *ngIf="displayprice">                       
+                                {{ quitem.qty *( quitem.kd? quitem.price2 : quitem.price )  | currency}}
+                                </span>
+                            </td>
+            
+                        <td>
+                            <div [ngSwitch]="quitem?.stock">
+                                <b *ngSwitchCase="'inStock'" class="text-success">{{quitem.stock}}</b>               
+                                <b *ngSwitchCase="'Low'" class="text-warning">{{quitem.stock}}</b>               
+                                <b *ngSwitchCase="'Out'" class="text-danger">{{quitem.stock}}</b>               
+                            </div>
+                        </td>
+                        <td>
+                            <span *ngIf="displaydescr">
+                            {{quitem.descr}}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                    <button mat-button (click)="openDialog(quitem)">
+                                        <i class="material-icons orange600">delete</i>
+                                    </button>
+                                
+                            </div>
+                        </td>
+                        <td>{{quitem.quotitemid}}</td>
+                </tr>
+                <tr>
+                <td colspan="11">========================</td>
+                </tr>
+                </tbody>
+                </table>
+            </div>
+
+            <div class="col-md border sidetotal">
+                <div class="row border">
+                    <div class="col-6 col-sm text-right">Cabinet:</div>
+                    <div class="col-4 col-sm">{{quotsummary.cabinet}}</div>
+                </div>
+                <div class="row border">
+                    <div class="col-6 col-sm text-right">Accessary:</div>
+                    <div class="col-4 col-sm">{{quotsummary.accessary}}</div>
+                </div>
+                <div class="row border">
+                    <div class="col-6 col-sm text-right">Others:</div>
+                    <div class="col-4 col-sm">{{quotsummary.others}}</div>
+                </div>
+                <div class="row border">
+                    <div class="col-6 col-sm text-right">Tatal Piece(s):</div>
+                    <div class="col-4 col-sm">{{quotsummary.totalpiece}}</div>
+                </div>                
+
+                    
+            <div  *ngIf="displayprice" >
+                <div class="row border">
+                    <div class="col-8 col-sm-6 text-right">
+                        <b>Subtotal:  </b>
+                    </div>
+                    <div class="col-4 col-sm-4 ">
+                        {{quotsummary.subtotal | currency}}
+                    </div>
+                </div>                   
+                <div class="row border">
+                    <div class="col-8 col-sm-6 text-right">
+                        <b>Discount:  </b>
+                    </div>
+                    <div class="col-4 col-sm-4 ">
+                        -8.64
+                    </div>
+                </div>
+                <div class="row border">
+                    <div class="col-8 col-sm-6 text-right">
+                        <b>Delivery Fee:  </b>
+                    </div>
+                    <div class="col-4 col-sm-4 ">
+                        35.00
+                    </div>
+                </div>
+                <div class="row border">
+                    <div class="col-8 col-sm-6 text-right">
+                        <b>Total:  </b>
+                    </div>
+                    <div class="col-4 col-sm-4 ">
+                        458.36
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+          
+
+         
+    </div>   
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
