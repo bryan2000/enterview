@@ -29,7 +29,7 @@
             
            <input #inpt matInput aria-label="Item" placeholder="Cabinet Entrance" [matAutocomplete]="oneauto"
            [formControl]="stockItemControl"  (keyup.enter)="stockItemSearchClick()">
-           <button  type="button" mat-button color="primary" mat-icon-button matSuffix 
+           <button *ngIf="inpt.value"  type="button" mat-button color="primary" mat-icon-button matSuffix 
            (click)="clearStockItem()"  >
                    <mat-icon>clear</mat-icon>
           </button>
@@ -83,8 +83,8 @@
                 <table class="table table-sm table-hover ">
                 <thead class="thead-light">
                     <tr>
-                            <th scope="col">#</th>
-                        <th scope="col">Qty</th>
+                           
+                        <th scope="col">Quantity</th>
                         <th scope="col">Style ({{quotsummary.styles}})</th>
                         <th scope="col">ITEM</th>
                         <th scope="col">L/R</th>
@@ -106,15 +106,17 @@
                 <tbody>
             
                 <tr *ngFor="let quitem of filteredQuoItems | async ; let i=index">
-                <td>{{i}}</td>
+               
                         
                         <td>
                                 <div class="input-group input-group-rounded float-left">
                     
-                                        <input type="number" max="99" min="1" class="form-control flat font-weight-bold input-sm"
-                                        [(ngModel)]="quitem.qty" 
-                                        (keyup)="kdChanged()" (change)="kdChanged()"
+                                        <input type="number" max="99" min="1" style="padding: 1px 3px 1px;"  
+                                        class="form-control font-weight-bold "
+                                        [(ngModel)]="quitem.qty" (keyup)="kdChanged()" (change)="kdChanged()"
                                         />
+                                        <input type="number" max="99" min="1"  matInput/>
+                                        
                     
                             </div>
                         </td>
@@ -175,7 +177,7 @@
                                 
                             </div>
                         </td>
-                        <td>{{quitem.quotitemid}}</td>
+                        <td>{{i}}</td>
                 </tr>
                 <tr>
                 <td colspan="11">========================</td>
