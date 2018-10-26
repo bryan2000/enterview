@@ -5,17 +5,30 @@
 
   
       
+        <div class="row ">
+            <div class="col-md-2" style="padding: 0px 3px 3px 15px;">
+                  <img *ngIf="selectedstyle" height="35" style="padding:5px;" [src]="selectedstyle.img">
+                   <mat-checkbox  [(ngModel)]="displayprice">Display Price </mat-checkbox>
+            </div>
+             <div class="col-md-2" >
+              <button mat-button color="primary"  >KD Assambled</button>
+             </div>
+  
+   
+  
+              <div class="col-md-3">
+               <b class="text-danger">{{errtxt}}</b>
+              </div>   
+         </div>
 
-    <br>
-    <hr>
+    <section id="divitementer">
 
-    <div id="divitementer">
 
 
         <div class="row">
-        <mat-form-field class="col-md-2">
-            
-               <mat-select placeholder="Style Code" [(value)]="selectedstyle" >
+        <mat-form-field class="col-md-2"  appearance="outline">
+            <mat-label>Style Code</mat-label> 
+               <mat-select placeholder="" [(value)]="selectedstyle" >
                  <mat-option>--</mat-option>
                  <mat-option *ngFor="let style of filterStyles | async " [value]="style"  (onSelectionChange)="styleselected($event,style)">
                        <img class="example-option-img" aria-hidden [src]="style.img" height="25">
@@ -24,8 +37,8 @@
                      </mat-option>
                </mat-select>
         </mat-form-field>
-        <mat-form-field class=" col-md-6">
-            
+        <mat-form-field class=" col-md-6"  >
+            <mat-label></mat-label>
            <input #inpt matInput aria-label="Item" placeholder="Cabinet Entrance" [matAutocomplete]="oneauto"
            [formControl]="stockItemControl"  (keyup.enter)="stockItemSearchClick()">
            <button *ngIf="inpt.value"  type="button" mat-button color="primary" mat-icon-button matSuffix 
@@ -63,20 +76,7 @@
    
        
        
-       <div class="row ">
-          <div class="col-md-2" style="padding: 0px 3px 3px 15px">
-                <img *ngIf="selectedstyle" height="35" [src]="selectedstyle.img">
-          </div>
-        
-          <div class="col-md-2">
-              <mat-checkbox  [(ngModel)]="displayprice">Display Price </mat-checkbox>
-           </div> 
- 
 
-            <div class="col-md-3">
-             <b class="text-danger">{{errtxt}}</b>
-            </div>   
-       </div>
 
        <div class="row">
             <div id="thirdTap" class="col-md-9 border-top border-secondary rounded-top divdetails " id="itemdetail" >
@@ -168,7 +168,7 @@
 
                         <td>
                             <div class="btn-group">
-                                    <button mat-button (click)="openDialog(quitem)">
+                                    <button mat-button (click)="openDialog(quitem)" >
                                         <i class="material-icons orange600">delete</i>
                                     </button>
                                 
@@ -252,7 +252,7 @@
           
 
          
-    </div>   
+    </section>   
        
 
 
