@@ -246,9 +246,11 @@ export class QuotitemComponent implements OnInit {
     this.getQuoteItems();
     this.filterStyles=this.quotSVC.getStyles();
     this.stockItemControl.valueChanges.subscribe(val=>{
+    if(val){
    const filterValue=val.toLowerCase();
    const selectedstylecode=this.selectedstyle? this.selectedstyle.name.toLowerCase():'';
    this.filteredStockItems=this.quotSVC.getStockItemsFilter(filterValue,selectedstylecode);
+    }
   });
   
   this.subtotal();
