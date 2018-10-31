@@ -11,19 +11,12 @@
               <img *ngIf="selectedstyle" height="35" style="padding:5px;" [src]="selectedstyle.img">
                <mat-checkbox  [(ngModel)]="displayprice">Display Price </mat-checkbox>
         </div>  
-        
-      <div class="col-md-3" >
-          <mat-button-toggle-group  #group="matButtonToggleGroup" >
-            <mat-button-toggle matTooltip="All KD" value=" KD" (click)="kdAssambled(true)" >
-              <mat-icon>inbox</mat-icon>
-              KD
-            </mat-button-toggle>
-            <mat-button-toggle matTooltip="All Assambled" value="Assambled" (click)="kdAssambled(false)">
-              <mat-icon>gavel</mat-icon>
-              Assambled
-            </mat-button-toggle>  
-                          
-          </mat-button-toggle-group>
+
+        <div class="col-md-3">
+            <button matTooltip="All KD" value=" KD" (click)="kdAssambled(true)" type="button" class="btn btn-outline-secondary btn-sm">
+                    <mat-icon md-18>inbox</mat-icon> KD</button>
+            <button  matTooltip="All Assambled" value="Assambled" (click)="kdAssambled(false)" type="button" class="btn btn-outline-success btn-sm">
+                    <mat-icon>gavel</mat-icon> Assambled</button>
         </div>
 
         
@@ -118,7 +111,9 @@
             </thead>
             <tbody>
         
-            <tr *ngFor="let quitem of filteredQuoItems | async ; let i=index">
+         <ng-container *ngFor="let quitem of filteredQuoItems | async ; let i=index">
+
+            <tr>
            
                     
                     <td>
@@ -188,8 +183,35 @@
                     </td>
                     <td>{{i}}</td>
             </tr>
+            <tr *ngIf="i===2">
+            <td colspan="10">
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Extra Changed for Customize Item
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        LO-B18 $45
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                
+                    <mat-form-field>
+                      <input matInput placeholder="Deep">
+                    </mat-form-field>
+                
+                    <mat-form-field>
+                      <input matInput placeholder="Inch">
+                    </mat-form-field>
+                  </mat-expansion-panel>
+
+            </td>
+            </tr>
+        </ng-container>
+            
             <tr>
-            <td colspan="10">========================</td>
+            <td colspan="10">========================             
+
+            </td>
             </tr>
             </tbody>
             </table>
