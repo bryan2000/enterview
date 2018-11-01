@@ -1,10 +1,9 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 
-import {QuotserviceService,} from './quotservice.service'
-import {styleCode,stockItem,quotItem,quotItemSummary} from './datainterface';
-import {FormControl} from '@angular/forms'
-import { Observable,of} from 'rxjs';
-import {map,startWith} from 'rxjs/operators';
+import {QuotserviceService,} from '../quotservice.service'
+import {styleCode,stockItem,quotItem,quotItemSummary,addressInfo} from '../datainterface';
+import {FormControl, Validators} from '@angular/forms'
+import { Observable} from 'rxjs';
 
 import {MatDialog,MatDialogRef,MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 
@@ -23,13 +22,17 @@ styleUrls: ['./quotitem.component.css']
 
 
 
+
 export class QuotitemComponent implements OnInit {
   stockItemControl =new FormControl();
   styleCtrl=new FormControl();
+addressCtrl=new FormControl('', [Validators.required]);
+
   filteredStockItems:Observable<stockItem[]>;
    filterStyles:Observable<styleCode[]>;
   filteredQuoItems: Observable<quotItem[]>;
   
+  shippingaddress:Observable<addressInfo[]>;
   
   
   stockitemtxt:string;
@@ -246,11 +249,10 @@ export class QuotitemComponent implements OnInit {
     this.getQuoteItems();
     this.filterStyles=this.quotSVC.getStyles();
     this.stockItemControl.valueChanges.subscribe(val=>{
-    if(val){
    const filterValue=val.toLowerCase();
    const selectedstylecode=this.selectedstyle? this.selectedstyle.name.toLowerCase():'';
    this.filteredStockItems=this.quotSVC.getStockItemsFilter(filterValue,selectedstylecode);
-    }
+   this.shippingaddress=this.quotSVC.getAddress();
   });
   
   this.subtotal();
@@ -343,7 +345,6 @@ export class QuotitemComponent implements OnInit {
   
 
 
-
 export interface DialogData {
 id: string;
 name: string;
@@ -356,12 +357,15 @@ templateUrl:'./quotitemdialog.html',
 
 export class Quotitemdialog {
 constructor(public dialogRef: MatDialogRef<Quotitemdialog>,
-  @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ){}
-  onNoClick(): void{
-    this.dialogRef.close();
-  }
+ @Inject(MAT_DIALOG_DATA) public data: DialogData
+ ){}
+ onNoClick(): void{
+   this.dialogRef.close();
+ }
 }
+
+
+
 
 
 
