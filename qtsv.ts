@@ -11,6 +11,53 @@ import {styleCode,stockItem,quotItem,quotItemSummary} from './datainterface';
 export class QuotserviceService {
 
 quotitemid: number=4;
+ 
+ 
+address:addressInfo[]=[
+  {
+    storeid:'st1001',
+    name:'Pickup',
+    address:'241 59th ST Brooklyn NY 11220',
+    phone:'718-888-8888',
+    contact:'Heor Markulande',
+    memo:'',
+  },
+  
+  {
+    storeid:'st1001',
+    name:'store',
+    address:'33-12 32 Ave flushing NY 12344',
+    phone:'233-222-9991',
+    contact:'Mike',
+    memo:'',
+  },
+  {
+    storeid:'st1002',
+    name:'store2',
+    address:'23-22 College Point Ave Flushing NY 10232',
+    phone:'219-388-2992',
+    contact:'Stone',
+    memo:'',
+  },
+  {
+    storeid:'st1003',
+    name:'warehouse1',
+    address:'50-01 College Porint Ave Flushing NY 10022',
+    phone:'333-222-1234',
+    contact:'Hanna',
+    memo:'',
+  },
+  {
+    storeid:'st1004',
+    name:'warehourse2',
+    address:'130 20 Ave Flushing NY 10000',
+    phone:'917-111-4444',
+    contact:'Jess',
+    memo:'',
+  },
+];
+ 
+ 
 
  stockitems: stockItem[]=[
    {id: 'itm1001',code:'B18',stylecode:'LO',descr:'Base 18" ',itemtype:'cab',price: 56.00,price2:44,price3:0,cost:33.00,rqside:true,rqkd:true,stock:'inStock'},
