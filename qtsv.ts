@@ -99,6 +99,10 @@ findStockItem(selectedstylevalue: string,searchValue:string):Observable<stockIte
    ));
 }
 
+ getAddress():Observable<addressInfo[]>{
+  return of(this.address);
+}
+
 
  constructor() { }
 }
