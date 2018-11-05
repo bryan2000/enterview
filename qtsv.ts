@@ -13,50 +13,6 @@ export class QuotserviceService {
 quotitemid: number=4;
  
  
-address:addressInfo[]=[
-  {
-    storeid:'st1001',
-    name:'Pickup',
-    address:'241 59th ST Brooklyn NY 11220',
-    phone:'718-888-8888',
-    contact:'Heor Markulande',
-    memo:'',
-  },
-  
-  {
-    storeid:'st1001',
-    name:'store',
-    address:'33-12 32 Ave flushing NY 12344',
-    phone:'233-222-9991',
-    contact:'Mike',
-    memo:'',
-  },
-  {
-    storeid:'st1002',
-    name:'store2',
-    address:'23-22 College Point Ave Flushing NY 10232',
-    phone:'219-388-2992',
-    contact:'Stone',
-    memo:'',
-  },
-  {
-    storeid:'st1003',
-    name:'warehouse1',
-    address:'50-01 College Porint Ave Flushing NY 10022',
-    phone:'333-222-1234',
-    contact:'Hanna',
-    memo:'',
-  },
-  {
-    storeid:'st1004',
-    name:'warehourse2',
-    address:'130 20 Ave Flushing NY 10000',
-    phone:'917-111-4444',
-    contact:'Jess',
-    memo:'',
-  },
-];
- 
  
 
  stockitems: stockItem[]=[
@@ -107,6 +63,93 @@ getStockItemsFilter(filterValue:string,selectedstylecode:string):Observable<stoc
    }
 
 }
+ 
+ 
+ 
+ address:addressInfo[]=[
+  {
+    storeid:'st1000',
+    name:'Pickup',
+    address1:'241 59th ST   ',
+    address2:'',
+    city:'Brooklyn',
+    state:'NY',
+    zipcode:'11220',
+    tel:'718-888-8888',
+    altphone:'',
+    fax:'718-853-5014',
+    contact:'Herry',
+    email:'',
+    addressmemo:'Heor Markulande',
+
+  },
+  
+  {
+    storeid:'st1001',
+    name:'Pick Up 2',
+    address1:'241 59th ST   ',
+    address2:'',
+    city:'Brooklyn',
+    state:'NY',
+    zipcode:'11220',
+    tel:'718-888-8888',
+    altphone:'',
+    fax:'718-853-5014',
+    contact:'Herry',
+    email:'',
+    addressmemo:'Heor Markulande',
+  },
+  {
+    storeid:'st1002',
+    name:'Store',
+    address1:'131-25 41th Avenue',
+    address2:'',
+    city:'Flushing',
+    state:'NY',
+    zipcode:'11355',
+    tel:'718-886-8665/718-8888-9938',
+    altphone:'',
+    fax:'718-886-8663',
+    contact:'HU',
+    email:'',
+    addressmemo:'Heor Markulande',
+  },
+  {
+    storeid:'st1003',
+    name:'warehouse1',
+    address1:'41-20A College Point Blvd ',
+    address2:'',
+    city:'Flushing',
+    state:'NY',
+    zipcode:'11355',
+    tel:'718-762-6888',
+    altphone:'',
+    fax:'718-762-6889',
+    contact:'Ashley',
+    email:'newhigh615@gmail.com',
+    addressmemo:'Net 30',
+  },
+  {
+    storeid:'st1004',
+    name:'warehourse2',
+    address1:'41-20B College Point Blvd ',
+    address2:'',
+    city:'Flushing',
+    state:'NY',
+    zipcode:'11355',
+    tel:'718-359-3800',
+    altphone:'',
+    fax:'718-359-3801',
+    contact:'Carrie',
+    email:'',
+    addressmemo:'Heor Markulande',
+  },
+];
+ 
+
+ 
+ 
+ ////////////////////////////////Data Above////////////////////
 
 
 
