@@ -3,6 +3,123 @@
 <div class="container mbl main">
 
 
+      <!-- Address ---------------------------------------------------------------------->
+
+ 
+            <div class="row">
+                <div class="col-md  bill">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">QU# 9950</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Majestic (688)</h6>
+
+                            <p class="card-text">
+                                5901 Fort Hamilton <br>Brooklyn NY 11220 <br>
+                                Tel: 718-888-2838
+                            </p>
+                            <a href="#" class="card-link">Terms: Net 15 </a><br>
+                            <a href="#" class="card-link">Discount For LO 2%</a><br>
+                            <a href="#" class="card-link">Delivery Fee $35 Under $500</a>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md ship">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Ship To (5936)  </h5>
+                            <div *ngIf="!isAddresedit"  >                                      
+                            <div class="input-group " >              
+                                <select (change)="Addresschanged($event.target.value)" class="form-control select select-info mbl" #selectadd >
+                                    <optgroup label="Ship To">
+                                        <option *ngFor="let ship of shippingaddresses | async" value="{{ship.addressid}}">{{ship.name}}</option>                                 
+                                    </optgroup>
+                                </select>
+ 
+                            </div>
+                            <hr>
+                             <section  id="label" (click)="EditMode(true)" style="cursor: pointer;">
+                                <p class="card-text">
+                                    241 59th ST <br>
+                                    Brooklyn NY 11022<br>
+                                    Tel: 718-888-8888  <br>
+                                    Contact: Heor Markulander<br>
+                                    {{selectaddressid}}
+
+                                </p>
+                                <span style="color:gray;">Click to Edit </span>
+                            </section>
+                        </div>
+                        <section *ngIf="isAddresedit" id="editing">
+    
+    <input class="form-control" placeholder="Shipping Name"  [value]="selectaddressid" >
+ 
+   
+    <br>
+ 
+ 
+ 
+ <mat-form-field>
+ <input #inptedit matInput placeholder="Address 1">
+ </mat-form-field>
+ <mat-form-field>
+ <input matInput placeholder="Address 2">
+ </mat-form-field>
+ <mat-form-field>
+ <input matInput placeholder="City">
+ </mat-form-field>
+ <mat-form-field>
+ <input matInput placeholder="State">
+ </mat-form-field>
+ <mat-form-field>
+ <input matInput placeholder="Tel">
+ </mat-form-field>
+ <mat-form-field>
+ <input matInput placeholder="Fax">
+ </mat-form-field>
+ <mat-form-field>
+ <input matInput placeholder="Contact">
+ </mat-form-field>
+ 
+ <mat-form-field style=" width: 100%;">
+    <textarea matInput #addmemo [(ngModel)]="addressmemo" rows=4 cols="20"
+    maxlength="100" placeholder="Mome" >
+ 
+     </textarea>
+     <mat-hint align="start"><strong>Additional info</strong> </mat-hint>
+     <mat-hint align="end">{{addmemo.value.length}} / 100</mat-hint>
+ </mat-form-field>
+ <br>
+        <button matTooltip="Save Changed" (click)="EditMode(true)" class="card-link btn btn-sm btn-outline-success ">
+            Save
+        </button>
+        <button matTooltip="Save as New" (click)="isAddresNew=!isAddresNew;" class="card-link btn btn-sm btn-outline-warning">
+            New
+        </button>
+        <button matTooltip="Discard" (click)="EditMode(false)" class="card-link btn btn-sm btn-outline-dark ">
+            Cancel
+        </button>
+ 
+   </section>
+                    <div [innerHTML]="addressmemo"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      
+<hr>
+
+
+
+
+
+
+
+
+
   
       
     <div class="row ">
@@ -67,8 +184,8 @@
               </span>
            </mat-option>
        </mat-autocomplete>
-    <input matInput #inptclr matSuffix style="width: 1px;"/>       
-      <mat-checkbox  [(ngModel)]="fullkd" matSuffix>
+    <input matInput matSuffix style="width: 1px;"/>       
+      <mat-checkbox  [(ngModel)]="fullkd" [labelPosition]="before" matSuffix>
       {{fullkd?'KD':'ASSM'}}
       </mat-checkbox>     
 
