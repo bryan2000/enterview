@@ -32,7 +32,7 @@ addressCtrl=new FormControl('', [Validators.required]);
    filterStyles:Observable<styleCode[]>;
   filteredQuoItems: Observable<quotItem[]>;
   
-  shippingaddress:Observable<addressInfo[]>;
+  shippingaddresses:Observable<addressInfo[]>;
   
   
   stockitemtxt:string;
@@ -251,10 +251,10 @@ addressCtrl=new FormControl('', [Validators.required]);
     this.stockItemControl.valueChanges.subscribe(val=>{
    const filterValue=val.toLowerCase();
    const selectedstylecode=this.selectedstyle? this.selectedstyle.name.toLowerCase():'';
-   this.filteredStockItems=this.quotSVC.getStockItemsFilter(filterValue,selectedstylecode);
-   this.shippingaddress=this.quotSVC.getAddress();
+   this.filteredStockItems=this.quotSVC.getStockItemsFilter(filterValue,selectedstylecode);  
   });
-  
+
+   this.shippingaddresses=this.quotSVC.getAddresses();
   this.subtotal();
   }
   
@@ -304,6 +304,32 @@ addressCtrl=new FormControl('', [Validators.required]);
    }
   }
   
+
+  EditMode(ipt:boolean){
+      this.isAddresedit=ipt;
+      setTimeout(() => {
+          this.inptclreditElement.nativeElement.focus();
+      this.inptclreditElement.nativeElement.select();    
+      }, 500);
+
+  }
+
+  Addresschanged(addrid:string){
+    console.log(addrid);
+    if(addrid){
+          this.quotSVC.findAddress(addrid).subscribe(
+            shipadd=>{
+              if(shipadd){
+                this.selectaddressid=shipadd.address1;
+              }
+            }
+          );
+    }
+
+
+  }
+
+  //////////////////////// Functions/////////////////////////////
   
   constructor(private quotSVC: QuotserviceService, public dialog:MatDialog, public snackBar: MatSnackBar) { ////////////////////////////////////////////////////////////////
    /////////////////////////////////////////////////////////////////////////////////
@@ -314,6 +340,11 @@ addressCtrl=new FormControl('', [Validators.required]);
   displaydescr: boolean=false;
   totalPrice: number=0;
   allkd:boolean=false;
+
+  isAddresedit:boolean=false;
+  selectaddressid:string='-1';
+
+  
   
   quotsummary: quotItemSummary={
     cabinet:0, //Piece
@@ -331,7 +362,9 @@ addressCtrl=new FormControl('', [Validators.required]);
   ;
   
   @ViewChild('inpt')  inptElement:ElementRef;
-  @ViewChild('inptclr') inptclrElement:ElementRef;
+
+  @ViewChild('inptedit') inptclreditElement:ElementRef;
+  
   
   } // Component Class
   
