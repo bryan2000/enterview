@@ -32,7 +32,7 @@ addressCtrl=new FormControl('', [Validators.required]);
    filterStyles:Observable<styleCode[]>;
   filteredQuoItems: Observable<quotItem[]>;
   
-  shippingaddresses:Observable<addressInfo[]>;
+  
   
   
   stockitemtxt:string;
@@ -89,15 +89,16 @@ addressCtrl=new FormControl('', [Validators.required]);
     this.setErrTxt(null);
     this.getQuoteItems();
   
-    setTimeout(()=>{ this.itemEnterScroll(); }, 500);
-    
+    setTimeout(()=>{ this.itemEnterScroll(); }, 500)
+ 
     this.subtotal();
   }
   getQuoteItems(){
     this.filteredQuoItems=this.quotSVC.getQuoteItems();
   }
   
-  CheckBoxClick(){  
+  CheckBoxClick(){
+  
    console.log('Check box click');
   }
   
@@ -251,9 +252,11 @@ addressCtrl=new FormControl('', [Validators.required]);
    this.filteredStockItems=this.quotSVC.getStockItemsFilter(filterValue,selectedstylecode);  
   });
 
-    this.shippingaddresses=this.quotSVC.getAddresses();
-    this.subtotal();
-    this.loadAddress('');
+   this.shippingaddresses=this.quotSVC.getAddresses();
+  this.subtotal();
+ 
+  //this.loadAddress(null);
+  this.Addresschanged('st1000');
   }
   
   
@@ -306,14 +309,17 @@ addressCtrl=new FormControl('', [Validators.required]);
   EditMode(ipt:boolean){
       this.isAddresedit=ipt;
       setTimeout(() => {
+        if(ipt){
           this.inptclreditElement.nativeElement.focus();
-      this.inptclreditElement.nativeElement.select();    
+      this.inptclreditElement.nativeElement.select(); 
+         }
       }, 500);
 
   }
 
 
-
+  //////////////////////// Functions/////////////////////////////
+  
   constructor(private quotSVC: QuotserviceService, public dialog:MatDialog, public snackBar: MatSnackBar) { ////////////////////////////////////////////////////////////////
    /////////////////////////////////////////////////////////////////////////////////
     }
@@ -324,70 +330,78 @@ addressCtrl=new FormControl('', [Validators.required]);
   totalPrice: number=0;
   allkd:boolean=false;
 
- isAddresNew: boolean=false;
+  isAddresedit:boolean=false;
   selectaddressid:string='-1';
 
-
-
+  
 
 ///////////shipping address //// START ////////////////
 
-  isAddresedit:boolean=false;
-  address1:string;
-  address2:string;
-  city:string;
-  state:string;
-  zipcode:string;
-  tel:string;
-  fax:string;
-  contact:string;
-  email:string;
-  addressmemo:string;
 
-  shippingaddresses:Observable<addressInfo[]>;
-  
+address1:string;
+address2:string;
+city:string;
+state:string;
+zipcode:string;
+tel:string;
+fax:string;
+contact:string;
+email:string;
+addressmemo:string;
+currenshippingaddrs: addressInfo;
+shippingaddresses:Observable<addressInfo[]>;
+
 
 
 ///////// shipping address ////  END  ///////////////////
 
-public loadAddress(addrid:string){
-  if(addrid){
-
-      }else{
-      
-      this.address1='241 59th ST';
-      this.address2='';
-      this.city='Brooklyn';
-      this.state='NY';
-      this.zipcode='11220';
-      this.tel='718-833-5079';
-      this.fax='718-853-5014';
-      this.contact='Herry';
-      this.addressmemo='Heor Markulander ';
-    }
+public loadAddress(addrs:addressInfo){
+if(addrs){  
+    this.address1=addrs.address1;
+    this.address2=addrs.address2;
+    this.city=addrs.city;
+    this.state=addrs.state;
+    this.zipcode=addrs.zipcode;
+    this.tel=addrs.tel;
+    this.fax=addrs.fax;
+    this.contact=addrs.contact;
+    this.email=addrs.email;
+    this.addressmemo=addrs.addressmemo;
+    }else{
+    
+    this.address1='241 59th ST';
+    this.address2='';
+    this.city='Brooklyn';
+    this.state='NY';
+    this.zipcode='11220';
+    this.tel='718-833-5079';
+    this.fax='718-853-5014';
+    this.contact='Herry';
+    this.email="abc@gmail.com"
+    this.addressmemo='Heor Markulander ';
+  }
 }
 
 
-  
-Addresschanged(addrs:addressInfo){
-  console.log(addrid);
-  if(addrid){
-        this.quotSVC.findAddress(addrid).subscribe(
-          shipadd=>{
-            if(shipadd){
-              this.selectaddressid=shipadd.address1;
-            }
+
+Addresschanged(addrid:string){
+console.log(addrid);
+if(addrid){
+      this.quotSVC.findAddress(addrid).subscribe(
+        shipadd=>{
+          if(shipadd){
+            this.currenshippingaddrs=shipadd;
+           this.loadAddress(shipadd);
           }
-        );
-  }
+        }
+      );
+}
 
 
 }
 
 //////////////////////// Functions/////////////////////////////
 
-
-  
   
   quotsummary: quotItemSummary={
     cabinet:0, //Piece
@@ -405,7 +419,6 @@ Addresschanged(addrs:addressInfo){
   ;
   
   @ViewChild('inpt')  inptElement:ElementRef;
-
   @ViewChild('inptedit') inptclreditElement:ElementRef;
   
   
