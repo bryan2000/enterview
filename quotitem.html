@@ -43,11 +43,13 @@
                             <hr>
                              <section  id="label" (click)="EditMode(true)" style="cursor: pointer;">
                                 <p class="card-text">
-                                    241 59th ST <br>
-                                    Brooklyn NY 11022<br>
-                                    Tel: 718-888-8888  <br>
-                                    Contact: Heor Markulander<br>
-                                    {{selectaddressid}}
+                                    {{address1}} <br>
+                                    {{address2}}
+                                    {{city}} {{state}} {{zipcode}}<br>
+                                    Tel: {{tel}}  Fax: {{fax}}<br>
+                                    Contact: {{contact}}<br>
+                                    EMail: {{email}}<br>
+                                    Memo:  {{addressmemo}}
 
                                 </p>
                                 <span style="color:gray;">Click to Edit </span>
@@ -55,7 +57,7 @@
                         </div>
                         <section *ngIf="isAddresedit" id="editing">
     
-    <input class="form-control" placeholder="Shipping Name"  [value]="selectaddressid" >
+    <input class="form-control" placeholder="Shipping Name"  [(ngModel)]="currenshippingaddrs.name" >
  
    
     <br>
@@ -63,29 +65,29 @@
  
  
  <mat-form-field>
- <input #inptedit matInput placeholder="Address 1">
+ <input #inptedit matInput placeholder="Address 1" [(ngModel)]="currenshippingaddrs.address1">
+ </mat-form-field>&nbsp;&nbsp;&nbsp;
+ <mat-form-field>
+ <input matInput placeholder="Address 2" [(ngModel)]="currenshippingaddrs.address2">
  </mat-form-field>
  <mat-form-field>
- <input matInput placeholder="Address 2">
+ <input matInput placeholder="City" [(ngModel)]="currenshippingaddrs.city">
  </mat-form-field>
  <mat-form-field>
- <input matInput placeholder="City">
+ <input matInput placeholder="State" [(ngModel)]="currenshippingaddrs.state">
  </mat-form-field>
  <mat-form-field>
- <input matInput placeholder="State">
+ <input matInput placeholder="Tel" [(ngModel)]="currenshippingaddrs.tel">
  </mat-form-field>
  <mat-form-field>
- <input matInput placeholder="Tel">
+ <input matInput placeholder="Fax" [(ngModel)]="currenshippingaddrs.fax">
  </mat-form-field>
  <mat-form-field>
- <input matInput placeholder="Fax">
- </mat-form-field>
- <mat-form-field>
- <input matInput placeholder="Contact">
+ <input matInput placeholder="Contact" [(ngModel)]="currenshippingaddrs.contact">
  </mat-form-field>
  
  <mat-form-field style=" width: 100%;">
-    <textarea matInput #addmemo [(ngModel)]="addressmemo" rows=4 cols="20"
+    <textarea matInput #addmemo [(ngModel)]="currenshippingaddrs.addmemo" rows=4 cols="20"
     maxlength="100" placeholder="Mome" >
  
      </textarea>
@@ -104,7 +106,7 @@
         </button>
  
    </section>
-                    <div [innerHTML]="addressmemo"></div>
+          
                         </div>
                     </div>
                 </div>
