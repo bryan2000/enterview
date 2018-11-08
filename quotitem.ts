@@ -312,11 +312,17 @@ addressCtrl=new FormControl('', [Validators.required]);
         if(ipt){
           this.inptclreditElement.nativeElement.focus();
       this.inptclreditElement.nativeElement.select(); 
+         } else{
+         this.loadAddress(this.currenshippingaddrs);
          }
       }, 500);
 
   }
 
+  public SaveAddress(){
+    this.loadAddress(null);
+    this.EditMode(false);
+  }
 
   //////////////////////// Functions/////////////////////////////
   
@@ -337,7 +343,7 @@ addressCtrl=new FormControl('', [Validators.required]);
 
 ///////////shipping address //// START ////////////////
 
-
+addrname:string;
 address1:string;
 address2:string;
 city:string;
@@ -357,6 +363,7 @@ shippingaddresses:Observable<addressInfo[]>;
 
 public loadAddress(addrs:addressInfo){
 if(addrs){  
+  this.addrname=addrs.name
     this.address1=addrs.address1;
     this.address2=addrs.address2;
     this.city=addrs.city;
@@ -367,18 +374,18 @@ if(addrs){
     this.contact=addrs.contact;
     this.email=addrs.email;
     this.addressmemo=addrs.addressmemo;
-    }else{
-    
-    this.address1='241 59th ST';
-    this.address2='';
-    this.city='Brooklyn';
-    this.state='NY';
-    this.zipcode='11220';
-    this.tel='718-833-5079';
-    this.fax='718-853-5014';
-    this.contact='Herry';
-    this.email="abc@gmail.com"
-    this.addressmemo='Heor Markulander ';
+    }else{    
+      this.currenshippingaddrs.name=this.addrname;
+    this.currenshippingaddrs.address1= this.address1;
+    this.currenshippingaddrs.address2= this.address2;
+    this.currenshippingaddrs.city= this.city;
+    this.currenshippingaddrs.state= this.state;
+    this.currenshippingaddrs.zipcode= this.zipcode;
+    this.currenshippingaddrs.tel= this.tel;
+    this.currenshippingaddrs.fax= this.fax;
+     this.currenshippingaddrs.contact= this.contact;
+    this.currenshippingaddrs.email= this.email;
+    this.currenshippingaddrs.addressmemo= this.addressmemo;
   }
 }
 
