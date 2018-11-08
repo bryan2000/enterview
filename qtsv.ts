@@ -194,6 +194,13 @@ findStockItem(selectedstylevalue: string,searchValue:string):Observable<stockIte
  getAddress():Observable<addressInfo[]>{
   return of(this.address);
 }
+ 
+ 
+addAddress(addrs:addressInfo):addressInfo{
+  addrs.addressid='st100'+(this.addresses.length+2);
+  this.addresses.push(addrs);
+  return addrs;
+}
 
 
  constructor() { }
