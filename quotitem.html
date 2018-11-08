@@ -3,115 +3,116 @@
 <div class="container mbl main">
 
 
-      <!-- Address ---------------------------------------------------------------------->
+    <!-- Address ---------------------------------------------------------------------->
+
+
+          <div class="row">
+              <div class="col-md  bill">
+                  <div class="card">
+                      <div class="card-body">
+                          <h5 class="card-title">QU# 9950</h5>
+                          <h6 class="card-subtitle mb-2 text-muted">Majestic (688)</h6>
+
+                          <p class="card-text">
+                              5901 Fort Hamilton <br>Brooklyn NY 11220 <br>
+                              Tel: 718-888-2838
+                          </p>
+                          <a href="#" class="card-link">Terms: Net 15 </a><br>
+                          <a href="#" class="card-link">Discount For LO 2%</a><br>
+                          <a href="#" class="card-link">Delivery Fee $35 Under $500</a>
+
+                      </div>
+                  </div>
+              </div>
+
+
+
+              <div class="col-md ship">
+                  <div class="card">
+                      <div class="card-body">
+                          <h5 class="card-title">Ship To (5936)  </h5>
+                          <div *ngIf="!isAddresedit"  >                                      
+                          <div class="input-group " >              
+                              <select (change)="Addresschanged($event.target.value)" class="form-control select select-info mbl" #selectadd >
+                                  <optgroup label="Ship To">
+                                      <option *ngFor="let ship of shippingaddresses | async" value="{{ship.addressid}}"
+                                          [selected]="ship.addressid==currenshippingaddrs.addressid"
+                                      >{{ship.name}}</option>                                 
+                                  </optgroup>
+                              </select>
+
+                          </div>
+                         
+                          <section  onMouseOver="this.style.background='lightgray'; "   onMouseOut="this.style.background='#fff'" id="label" (click)="EditMode(true)" style="cursor: pointer;">
+                              <p class="card-text">
+                                  {{currenshippingaddrs.address1}}&nbsp;&nbsp; {{currenshippingaddrs.address2}}<br>
+                                  {{currenshippingaddrs.city}} {{currenshippingaddrs.state}} {{currenshippingaddrs.zipcode}} <br>
+                                  Tel: {{currenshippingaddrs.tel}}   <br>
+                                  Fax: {{currenshippingaddrs.fax}}<br>
+                                  Contact: <b> {{currenshippingaddrs.contact}}</b><br>
+                                  EMail: {{currenshippingaddrs.email}}
+                                  Memo: {{currenshippingaddrs.memo}}
+                              </p>
+                            
+                          </section>
+                      </div>
+
+                      <section *ngIf="isAddresedit" id="editing">
+  
+  <input class="form-control" placeholder="Shipping Name"  [(ngModel)]="addrname" >
 
  
-            <div class="row">
-                <div class="col-md  bill">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">QU# 9950</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Majestic (688)</h6>
-
-                            <p class="card-text">
-                                5901 Fort Hamilton <br>Brooklyn NY 11220 <br>
-                                Tel: 718-888-2838
-                            </p>
-                            <a href="#" class="card-link">Terms: Net 15 </a><br>
-                            <a href="#" class="card-link">Discount For LO 2%</a><br>
-                            <a href="#" class="card-link">Delivery Fee $35 Under $500</a>
-
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="col-md ship">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Ship To (5936)  </h5>
-                            <div *ngIf="!isAddresedit"  >                                      
-                            <div class="input-group " >              
-                                <select (change)="Addresschanged($event.target.value)" class="form-control select select-info mbl" #selectadd >
-                                    <optgroup label="Ship To">
-                                        <option *ngFor="let ship of shippingaddresses | async" value="{{ship.addressid}}"
-                                            [selected]="ship.addressid==currenshippingaddrs.addressid"
-                                        >{{ship.name}}</option>                                 
-                                    </optgroup>
-                                </select>
- 
-                            </div>
-                            <hr>
-                            <section  onMouseOver="this.style.background='lightgray'; "   onMouseOut="this.style.background='#fff'" id="label" (click)="EditMode(true)" style="cursor: pointer;">
-                                <p class="card-text">
-                                    {{currenshippingaddrs.address1}} {{currenshippingaddrs.address2}}<br>
-                                    {{currenshippingaddrs.city}} {{currenshippingaddrs.state}} {{currenshippingaddrs.zipcode}} <br>
-                                    Tel: {{currenshippingaddrs.tel}}   <br>
-                                    Fax: {{currenshippingaddrs.fax}}<br>
-                                    Contact: <b> {{currenshippingaddrs.contact}}</b><br>
-                                    EMail: {{currenshippingaddrs.email}}
-                                    Memo: {{currenshippingaddrs.memo}}
-                                </p>
-                                <span style="color:gray;">Click to Edit </span>
-                            </section>
-                        </div>
-                        <section *ngIf="isAddresedit" id="editing">
-    
-    <input class="form-control" placeholder="Shipping Name"  [(ngModel)]="addrname" >
- 
-   
-    <br>
+  <br>
 
 <mat-form-field>
-    <input #inptedit matInput placeholder="Address 1" [(ngModel)]='address1' maxlength="50">
-    </mat-form-field>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-    <mat-form-field>
-    <input matInput placeholder="Address 2" [(ngModel)]='address2' maxlength="50">
-    </mat-form-field>
-    <mat-form-field>
-    <input matInput placeholder="City"  [(ngModel)]='city' maxlength="20">
-    </mat-form-field>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-    <mat-form-field>
-    <input matInput placeholder="State" [(ngModel)]='state' maxlength="10">
-    </mat-form-field>
-    <mat-form-field>
-    <input matInput placeholder="Tel" [(ngModel)]='tel' maxlength="15">
-    </mat-form-field>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-    <mat-form-field>
-    <input matInput placeholder="Fax" [(ngModel)]='fax' maxlength="15">
-    </mat-form-field>
-    <mat-form-field>
-    <input matInput placeholder="Contact" [(ngModel)]=contact maxlength="50">
-    </mat-form-field>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+  <input #inptedit matInput placeholder="Address 1" [(ngModel)]='address1' maxlength="50">
+  </mat-form-field>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+  <mat-form-field>
+  <input matInput placeholder="Address 2" [(ngModel)]='address2' maxlength="50">
+  </mat-form-field>
+  <mat-form-field>
+  <input matInput placeholder="City"  [(ngModel)]='city' maxlength="20">
+  </mat-form-field>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+  <mat-form-field>
+  <input matInput placeholder="State" [(ngModel)]='state' maxlength="10">
+  </mat-form-field>
+  <mat-form-field>
+  <input matInput placeholder="Tel" [(ngModel)]='tel' maxlength="15">
+  </mat-form-field>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+  <mat-form-field>
+  <input matInput placeholder="Fax" [(ngModel)]='fax' maxlength="15">
+  </mat-form-field>
+  <mat-form-field>
+  <input matInput placeholder="Contact" [(ngModel)]=contact maxlength="50">
+  </mat-form-field>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+  
+  <mat-form-field style=" width: 100%;">
+     <textarea matInput #addmemo [(ngModel)]="addressmemo" rows=4 cols="20"
+     maxlength="100" placeholder="Memo" >
+  
+      </textarea>
+      <mat-hint align="start"><strong>Additional info</strong> </mat-hint>
+      <mat-hint align="end">{{addmemo.value.length}} / 100</mat-hint>
+  </mat-form-field>
+  
+<br>
+      <button matTooltip="Save Changed" (click)="SaveAddress()" class="card-link btn btn-sm btn-outline-success ">
+          Save
+      </button>
+      <button matTooltip="Save as New" (click)="NewAddress()" class="card-link btn btn-sm btn-outline-warning">
+          New
+      </button>
+      <button matTooltip="Discard" (click)="EditMode(false)" class="card-link btn btn-sm btn-outline-dark ">
+          Cancel
+      </button>
+
+ </section>
+        
+                      </div>
+                  </div>
+              </div>
+          </div>
     
-    <mat-form-field style=" width: 100%;">
-       <textarea matInput #addmemo [(ngModel)]="addressmemo" rows=4 cols="20"
-       maxlength="100" placeholder="Memo" >
-    
-        </textarea>
-        <mat-hint align="start"><strong>Additional info</strong> </mat-hint>
-        <mat-hint align="end">{{addmemo.value.length}} / 100</mat-hint>
-    </mat-form-field>
-    
- <br>
-        <button matTooltip="Save Changed" (click)="SaveAddress()" class="card-link btn btn-sm btn-outline-success ">
-            Save
-        </button>
-        <button matTooltip="Save as New" (click)="isAddresNew=!isAddresNew;" class="card-link btn btn-sm btn-outline-warning">
-            New
-        </button>
-        <button matTooltip="Discard" (click)="EditMode(false)" class="card-link btn btn-sm btn-outline-dark ">
-            Cancel
-        </button>
- 
-   </section>
-          
-                        </div>
-                    </div>
-                </div>
-            </div>
-      
 <hr>
 
 
@@ -122,291 +123,291 @@
 
 
 
-  
+
+    
+  <div class="row ">
+
+      <div class="col-md-2" style="padding: 0px 3px 3px 15px;">
+            <img *ngIf="selectedstyle" height="35" style="padding:5px;" [src]="selectedstyle.img">
+             <mat-checkbox  [(ngModel)]="displayprice">Display Price </mat-checkbox>
+      </div>  
+
+      <div class="col-md-3">
+          <button matTooltip="All KD" value=" KD" (click)="kdAssambled(true)" type="button" class="btn btn-outline-secondary btn-sm">
+                  <mat-icon md-18>inbox</mat-icon> KD</button>
+          <button  matTooltip="All Assambled" value="Assambled" (click)="kdAssambled(false)" type="button" class="btn btn-outline-success btn-sm">
+                  <mat-icon>gavel</mat-icon> Assambled</button>
+      </div>
+
       
-    <div class="row ">
 
-        <div class="col-md-2" style="padding: 0px 3px 3px 15px;">
-              <img *ngIf="selectedstyle" height="35" style="padding:5px;" [src]="selectedstyle.img">
-               <mat-checkbox  [(ngModel)]="displayprice">Display Price </mat-checkbox>
-        </div>  
-
-        <div class="col-md-3">
-            <button matTooltip="All KD" value=" KD" (click)="kdAssambled(true)" type="button" class="btn btn-outline-secondary btn-sm">
-                    <mat-icon md-18>inbox</mat-icon> KD</button>
-            <button  matTooltip="All Assambled" value="Assambled" (click)="kdAssambled(false)" type="button" class="btn btn-outline-success btn-sm">
-                    <mat-icon>gavel</mat-icon> Assambled</button>
-        </div>
-
-        
-
-        <div class="col-md-3">
-           <b class="text-danger">{{errtxt}}</b>
-        </div>   
-     </div>
+      <div class="col-md-3">
+         <b class="text-danger">{{errtxt}}</b>
+      </div>   
+   </div>
 
 <section id="divitementer">
 
 
 
-    <div class="row">
-    <mat-form-field class="col-md-2"  appearance="outline">
-        <mat-label>Style Code</mat-label> 
-           <mat-select placeholder="" [(value)]="selectedstyle" >
-             <mat-option>--</mat-option>
-             <mat-option *ngFor="let style of filterStyles | async " [value]="style"  (onSelectionChange)="styleselected($event,style)">
-                   <img class="example-option-img" aria-hidden [src]="style.img" height="25">
-                   <span>{{style.name}}--</span>
-                
-                 </mat-option>
-           </mat-select>
-    </mat-form-field>
-    <mat-form-field class=" col-md-6"  >
-        
-       <input #inpt matInput aria-label="Item" placeholder="Cabinet Entrance" [matAutocomplete]="oneauto"
-       [formControl]="stockItemControl"  (keyup.enter)="stockItemSearchClick()">
-       <button *ngIf="inpt.value"  type="button" mat-button color="primary" mat-icon-button matSuffix 
-       (click)="clearStockItem()"  >
-               <mat-icon>clear</mat-icon>
-      </button>
-         
-       <mat-autocomplete autoActiveFirstOption #oneauto="matAutocomplete"
-       [displayWith]="displayNull"
-       >
-           <mat-option *ngFor="let sitem of filteredStockItems | async" [value]="sitem.code"
-     (onSelectionChange)="stockItemSelected($event,sitem)"
-           >
-                   <img class="example-option-img" aria-hidden [src]="getStyleImg(sitem.stylecode)" height="45">
-              <span>{{sitem.stylecode}}-{{sitem.code}}
-                   <span [ngSwitch]="sitem?.stock">
-                           <b *ngSwitchCase="'inStock'" class="text-success">{{sitem.stock}}</b>               
-                           <b *ngSwitchCase="'Low'" class="text-warning">{{sitem.stock}}</b>               
-                           <b *ngSwitchCase="'Out'" class="text-danger">{{sitem.stock}}</b>               
-                   </span>
-              </span>
-           </mat-option>
-       </mat-autocomplete>
-    <input matInput matSuffix style="width: 1px;"/>       
-      <mat-checkbox  [(ngModel)]="fullkd" [labelPosition]="before" matSuffix>
-      {{fullkd?'KD':'ASSM'}}
-      </mat-checkbox>     
-
-    </mat-form-field>
-   
-
-   
-    </div>
-
-
-   
-   
-
-
-   <div class="row">
-        <div id="thirdTap" class="col-md-9 border-top border-secondary rounded-top divdetails " id="itemdetail" >
-    
-            <table class="table table-sm table-hover ">
-            <thead class="thead-light">
-                <tr>
-                       
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Style ({{quotsummary.styles}})</th>
-                    <th scope="col">ITEM</th>
-                    <th scope="col">L/R</th>
-                    <th scope="col">KD</th>
-                    <th scope="col">
-                        <span *ngIf="displayprice">PRICE</span>
-                    </th>            
-                    <th scope="col">
-                        <span *ngIf="displayprice">  
-                        Amount
-                        </span>
-                    </th>
-                    <th scope="col">Stock</th>
-            
-                        <th scope="col"></th>      
-                        <th scope="col">SEQU</th>           
-                </tr>
-            </thead>
-            <tbody>
-        
-         <ng-container *ngFor="let quitem of filteredQuoItems | async ; let i=index">
-
-            <tr>
-           
-                    
-                    <td>
-                            <div class="input-group input-group-rounded float-left">
-                
-                                    <input type="number" max="99" min="1" style="padding: 1px 3px 1px ;"  
-                                    class="form-control font-weight-bold "
-                                    [(ngModel)]="quitem.qty" (keyup)="kdChanged()" (change)="kdChanged()"
-                                    />
-                                  
-                                    
-                
-                        </div>
-                    </td>
-                    <td>
-                        <img class="example-option-img" aria-hidden [src]="getStyleImg(quitem.stylecode)" height="25">
-                        <span>{{quitem.stylecode}}</span>
-                    </td>
-                    <td><b>{{quitem.code}} </b></td>
-                    <td>
-                        <span *ngIf="quitem.rqside">
-                    
-                        <mat-slide-toggle
-                        [checked]="quitem.side.toLowerCase()==='right'"
-                        (change)="slidetoggle(quitem)">
-                        {{quitem.side |uppercase}}
-                        </mat-slide-toggle>
-                        </span>
-                    </td>
-        
-        
-                    <td>
-                        <span *ngIf="quitem.rqkd">
-                                <mat-checkbox (click)="kdChanged()"
-                                [(ngModel)]="quitem.kd">
-                                    {{quitem.kd?'KD':'ASSM'}}
-                                </mat-checkbox>        
-                            </span>
-                        </td>
-                        <td >
-                            <span *ngIf="displayprice">
-                            <b> {{(quitem.kd? quitem.price2 : quitem.price) | currency}}</b>                               
- 
-                            </span>                 
-                        </td>  
-                        <td>   
-                            <span *ngIf="displayprice">                       
-                            {{ quitem.qty *( quitem.kd? quitem.price2 : quitem.price )  | currency}}
-                            </span>
-                        </td>
-        
-                    <td>
-                        <div [ngSwitch]="quitem?.stock">
-                            <b *ngSwitchCase="'inStock'" class="text-success">{{quitem.stock}}</b>               
-                            <b *ngSwitchCase="'Low'" class="text-warning">{{quitem.stock}}</b>               
-                            <b *ngSwitchCase="'Out'" class="text-danger">{{quitem.stock}}</b>               
-                        </div>
-                    </td>
-
-                    <td>
-                        <div class="btn-group">
-                                <button mat-button (click)="openDialog(quitem)" >
-                                    <i class="material-icons orange600">delete</i>
-                                </button>
-                            
-                        </div>
-                    </td>
-                    <td>{{i}}</td>
-            </tr>
-            <tr *ngIf="i===2">
-            <td colspan="10">
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                      <mat-panel-title>
-                        Extra Changed for Customize Item
-                      </mat-panel-title>
-                      <mat-panel-description>
-                        LO-B18 $45
-                      </mat-panel-description>
-                    </mat-expansion-panel-header>
-                
-                    <mat-form-field>
-                      <input matInput placeholder="Deep">
-                    </mat-form-field>
-                
-                    <mat-form-field>
-                      <input matInput placeholder="Inch">
-                    </mat-form-field>
-                  </mat-expansion-panel>
-
-            </td>
-            </tr>
-        </ng-container>
-            
-            <tr>
-            <td colspan="10">========================             
-
-            </td>
-            </tr>
-            </tbody>
-            </table>
-        </div>
-
-        <div class="col-md border sidetotal">
-            <div class="row border">
-                <div class="col-6 col-sm text-right">Cabinet:</div>
-                <div class="col-4 col-sm">{{quotsummary.cabinet}}</div>
-            </div>
-            <div class="row border">
-                <div class="col-6 col-sm text-right">Accessary:</div>
-                <div class="col-4 col-sm">{{quotsummary.accessary}}</div>
-            </div>
-            <div class="row border">
-                <div class="col-6 col-sm text-right">Others:</div>
-                <div class="col-4 col-sm">{{quotsummary.others}}</div>
-            </div>
-            <div class="row border">
-                <div class="col-6 col-sm text-right">Tatal Piece(s):</div>
-                <div class="col-4 col-sm">{{quotsummary.totalpiece}}</div>
-            </div>                
-
-                
-        <div  *ngIf="displayprice" >
-            <div class="row border">
-                <div class="col-8 col-sm-6 text-right">
-                    <b>Subtotal:  </b>
-                </div>
-                <div class="col-4 col-sm-4 ">
-                    {{quotsummary.subtotal | currency}}
-                </div>
-            </div>                   
-            <div class="row border">
-                <div class="col-8 col-sm-6 text-right">
-                    <b>Discount:  </b>
-                </div>
-                <div class="col-4 col-sm-4 ">
-                    -{{quotsummary.discount | currency}}
-                </div>
-            </div>
-
-            <div class="row border">
-                <div class="col-8 col-sm-6 text-right">
-                    <b>Sales Tax:  </b>
-                </div>
-                <div class="col-4 col-sm-4 ">
-                    {{quotsummary.tax | currency}}
-                </div>
-            </div>
-            
-            <div class="row border">
-                <div class="col-8 col-sm-6 text-right">
-                    <b>Delivery Fee:  </b>
-                </div>
-                <div class="col-4 col-sm-4 ">
-                    {{quotsummary.deliveryfee | currency}}
-                </div>
-            </div>
-            <div class="row border">
-                <div class="col-8 col-sm-6 text-right">
-                    <b>Total:  </b>
-                </div>
-                <div class="col-4 col-sm-4 ">
-                    {{this.quotsummary.total | currency}}
-                </div>
-            </div>
-        </div>
-        </div>
-    </div>
-
+  <div class="row">
+  <mat-form-field class="col-md-2"  appearance="outline">
+      <mat-label>Style Code</mat-label> 
+         <mat-select placeholder="" [(value)]="selectedstyle" >
+           <mat-option>--</mat-option>
+           <mat-option *ngFor="let style of filterStyles | async " [value]="style"  (onSelectionChange)="styleselected($event,style)">
+                 <img class="example-option-img" aria-hidden [src]="style.img" height="25">
+                 <span>{{style.name}}--</span>
+              
+               </mat-option>
+         </mat-select>
+  </mat-form-field>
+  <mat-form-field class=" col-md-6"  >
       
+     <input #inpt matInput aria-label="Item" placeholder="Cabinet Entrance" [matAutocomplete]="oneauto"
+     [formControl]="stockItemControl"  (keyup.enter)="stockItemSearchClick()">
+     <button *ngIf="inpt.value"  type="button" mat-button color="primary" mat-icon-button matSuffix 
+     (click)="clearStockItem()"  >
+             <mat-icon>clear</mat-icon>
+    </button>
+       
+     <mat-autocomplete autoActiveFirstOption #oneauto="matAutocomplete"
+     [displayWith]="displayNull"
+     >
+         <mat-option *ngFor="let sitem of filteredStockItems | async" [value]="sitem.code"
+   (onSelectionChange)="stockItemSelected($event,sitem)"
+         >
+                 <img class="example-option-img" aria-hidden [src]="getStyleImg(sitem.stylecode)" height="45">
+            <span>{{sitem.stylecode}}-{{sitem.code}}
+                 <span [ngSwitch]="sitem?.stock">
+                         <b *ngSwitchCase="'inStock'" class="text-success">{{sitem.stock}}</b>               
+                         <b *ngSwitchCase="'Low'" class="text-warning">{{sitem.stock}}</b>               
+                         <b *ngSwitchCase="'Out'" class="text-danger">{{sitem.stock}}</b>               
+                 </span>
+            </span>
+         </mat-option>
+     </mat-autocomplete>
+  <input matInput matSuffix style="width: 1px;"/>       
+    <mat-checkbox  [(ngModel)]="fullkd" [labelPosition]="before" matSuffix>
+    {{fullkd?'KD':'ASSM'}}
+    </mat-checkbox>     
 
-     
-</section>   
+  </mat-form-field>
+ 
+
+ 
+  </div>
+
+
+ 
+ 
+
+
+ <div class="row">
+      <div id="thirdTap" class="col-md-9 border-top border-secondary rounded-top divdetails " id="itemdetail" >
+  
+          <table class="table table-sm table-hover ">
+          <thead class="thead-light">
+              <tr>
+                     
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Style ({{quotsummary.styles}})</th>
+                  <th scope="col">ITEM</th>
+                  <th scope="col">L/R</th>
+                  <th scope="col">KD</th>
+                  <th scope="col">
+                      <span *ngIf="displayprice">PRICE</span>
+                  </th>            
+                  <th scope="col">
+                      <span *ngIf="displayprice">  
+                      Amount
+                      </span>
+                  </th>
+                  <th scope="col">Stock</th>
+          
+                      <th scope="col"></th>      
+                      <th scope="col">SEQU</th>           
+              </tr>
+          </thead>
+          <tbody>
+      
+       <ng-container *ngFor="let quitem of filteredQuoItems | async ; let i=index">
+
+          <tr>
+         
+                  
+                  <td>
+                          <div class="input-group input-group-rounded float-left">
+              
+                                  <input type="number" max="99" min="1" style="padding: 1px 3px 1px ;"  
+                                  class="form-control font-weight-bold "
+                                  [(ngModel)]="quitem.qty" (keyup)="kdChanged()" (change)="kdChanged()"
+                                  />
+                                
+                                  
+              
+                      </div>
+                  </td>
+                  <td>
+                      <img class="example-option-img" aria-hidden [src]="getStyleImg(quitem.stylecode)" height="25">
+                      <span>{{quitem.stylecode}}</span>
+                  </td>
+                  <td><b>{{quitem.code}} </b></td>
+                  <td>
+                      <span *ngIf="quitem.rqside">
+                  
+                      <mat-slide-toggle
+                      [checked]="quitem.side.toLowerCase()==='right'"
+                      (change)="slidetoggle(quitem)">
+                      {{quitem.side |uppercase}}
+                      </mat-slide-toggle>
+                      </span>
+                  </td>
+      
+      
+                  <td>
+                      <span *ngIf="quitem.rqkd">
+                              <mat-checkbox (click)="kdChanged()"
+                              [(ngModel)]="quitem.kd">
+                                  {{quitem.kd?'KD':'ASSM'}}
+                              </mat-checkbox>        
+                          </span>
+                      </td>
+                      <td >
+                          <span *ngIf="displayprice">
+                          <b> {{(quitem.kd? quitem.price2 : quitem.price) | currency}}</b>                               
+
+                          </span>                 
+                      </td>  
+                      <td>   
+                          <span *ngIf="displayprice">                       
+                          {{ quitem.qty *( quitem.kd? quitem.price2 : quitem.price )  | currency}}
+                          </span>
+                      </td>
+      
+                  <td>
+                      <div [ngSwitch]="quitem?.stock">
+                          <b *ngSwitchCase="'inStock'" class="text-success">{{quitem.stock}}</b>               
+                          <b *ngSwitchCase="'Low'" class="text-warning">{{quitem.stock}}</b>               
+                          <b *ngSwitchCase="'Out'" class="text-danger">{{quitem.stock}}</b>               
+                      </div>
+                  </td>
+
+                  <td>
+                      <div class="btn-group">
+                              <button mat-button (click)="openDialog(quitem)" >
+                                  <i class="material-icons orange600">delete</i>
+                              </button>
+                          
+                      </div>
+                  </td>
+                  <td>{{i}}</td>
+          </tr>
+          <tr *ngIf="i===2">
+          <td colspan="10">
+              <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Extra Changed for Customize Item
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      LO-B18 $45
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+              
+                  <mat-form-field>
+                    <input matInput placeholder="Deep">
+                  </mat-form-field>
+              
+                  <mat-form-field>
+                    <input matInput placeholder="Inch">
+                  </mat-form-field>
+                </mat-expansion-panel>
+
+          </td>
+          </tr>
+      </ng-container>
+          
+          <tr>
+          <td colspan="10">========================             
+
+          </td>
+          </tr>
+          </tbody>
+          </table>
+      </div>
+
+      <div class="col-md border sidetotal">
+          <div class="row border">
+              <div class="col-6 col-sm text-right">Cabinet:</div>
+              <div class="col-4 col-sm">{{quotsummary.cabinet}}</div>
+          </div>
+          <div class="row border">
+              <div class="col-6 col-sm text-right">Accessary:</div>
+              <div class="col-4 col-sm">{{quotsummary.accessary}}</div>
+          </div>
+          <div class="row border">
+              <div class="col-6 col-sm text-right">Others:</div>
+              <div class="col-4 col-sm">{{quotsummary.others}}</div>
+          </div>
+          <div class="row border">
+              <div class="col-6 col-sm text-right">Tatal Piece(s):</div>
+              <div class="col-4 col-sm">{{quotsummary.totalpiece}}</div>
+          </div>                
+
+              
+      <div  *ngIf="displayprice" >
+          <div class="row border">
+              <div class="col-8 col-sm-6 text-right">
+                  <b>Subtotal:  </b>
+              </div>
+              <div class="col-4 col-sm-4 ">
+                  {{quotsummary.subtotal | currency}}
+              </div>
+          </div>                   
+          <div class="row border">
+              <div class="col-8 col-sm-6 text-right">
+                  <b>Discount:  </b>
+              </div>
+              <div class="col-4 col-sm-4 ">
+                  -{{quotsummary.discount | currency}}
+              </div>
+          </div>
+
+          <div class="row border">
+              <div class="col-8 col-sm-6 text-right">
+                  <b>Sales Tax:  </b>
+              </div>
+              <div class="col-4 col-sm-4 ">
+                  {{quotsummary.tax | currency}}
+              </div>
+          </div>
+          
+          <div class="row border">
+              <div class="col-8 col-sm-6 text-right">
+                  <b>Delivery Fee:  </b>
+              </div>
+              <div class="col-4 col-sm-4 ">
+                  {{quotsummary.deliveryfee | currency}}
+              </div>
+          </div>
+          <div class="row border">
+              <div class="col-8 col-sm-6 text-right">
+                  <b>Total:  </b>
+              </div>
+              <div class="col-4 col-sm-4 ">
+                  {{this.quotsummary.total | currency}}
+              </div>
+          </div>
+      </div>
+      </div>
+  </div>
+
+    
+
    
+</section>   
+ 
 
 
 
