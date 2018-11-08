@@ -35,67 +35,67 @@
                             <div class="input-group " >              
                                 <select (change)="Addresschanged($event.target.value)" class="form-control select select-info mbl" #selectadd >
                                     <optgroup label="Ship To">
-                                        <option *ngFor="let ship of shippingaddresses | async" value="{{ship.addressid}}">{{ship.name}}</option>                                 
+                                        <option *ngFor="let ship of shippingaddresses | async" value="{{ship.addressid}}"
+                                            [selected]="ship.addressid==currenshippingaddrs.addressid"
+                                        >{{ship.name}}</option>                                 
                                     </optgroup>
                                 </select>
  
                             </div>
                             <hr>
-                             <section  id="label" (click)="EditMode(true)" style="cursor: pointer;">
+                            <section  onMouseOver="this.style.background='lightgray'; "   onMouseOut="this.style.background='#fff'" id="label" (click)="EditMode(true)" style="cursor: pointer;">
                                 <p class="card-text">
-                                    {{address1}} <br>
-                                    {{address2}}
-                                    {{city}} {{state}} {{zipcode}}<br>
-                                    Tel: {{tel}}  Fax: {{fax}}<br>
-                                    Contact: {{contact}}<br>
-                                    EMail: {{email}}<br>
-                                    Memo:  {{addressmemo}}
-
+                                    {{currenshippingaddrs.address1}} {{currenshippingaddrs.address2}}<br>
+                                    {{currenshippingaddrs.city}} {{currenshippingaddrs.state}} {{currenshippingaddrs.zipcode}} <br>
+                                    Tel: {{currenshippingaddrs.tel}}   <br>
+                                    Fax: {{currenshippingaddrs.fax}}<br>
+                                    Contact: <b> {{currenshippingaddrs.contact}}</b><br>
+                                    EMail: {{currenshippingaddrs.email}}
+                                    Memo: {{currenshippingaddrs.memo}}
                                 </p>
                                 <span style="color:gray;">Click to Edit </span>
                             </section>
                         </div>
                         <section *ngIf="isAddresedit" id="editing">
     
-    <input class="form-control" placeholder="Shipping Name"  [(ngModel)]="currenshippingaddrs.name" >
+    <input class="form-control" placeholder="Shipping Name"  [(ngModel)]="addrname" >
  
    
     <br>
- 
- 
- 
- <mat-form-field>
- <input #inptedit matInput placeholder="Address 1" [(ngModel)]="currenshippingaddrs.address1">
- </mat-form-field>&nbsp;&nbsp;&nbsp;
- <mat-form-field>
- <input matInput placeholder="Address 2" [(ngModel)]="currenshippingaddrs.address2">
- </mat-form-field>
- <mat-form-field>
- <input matInput placeholder="City" [(ngModel)]="currenshippingaddrs.city">
- </mat-form-field>
- <mat-form-field>
- <input matInput placeholder="State" [(ngModel)]="currenshippingaddrs.state">
- </mat-form-field>
- <mat-form-field>
- <input matInput placeholder="Tel" [(ngModel)]="currenshippingaddrs.tel">
- </mat-form-field>
- <mat-form-field>
- <input matInput placeholder="Fax" [(ngModel)]="currenshippingaddrs.fax">
- </mat-form-field>
- <mat-form-field>
- <input matInput placeholder="Contact" [(ngModel)]="currenshippingaddrs.contact">
- </mat-form-field>
- 
- <mat-form-field style=" width: 100%;">
-    <textarea matInput #addmemo [(ngModel)]="currenshippingaddrs.addmemo" rows=4 cols="20"
-    maxlength="100" placeholder="Mome" >
- 
-     </textarea>
-     <mat-hint align="start"><strong>Additional info</strong> </mat-hint>
-     <mat-hint align="end">{{addmemo.value.length}} / 100</mat-hint>
- </mat-form-field>
+
+<mat-form-field>
+    <input #inptedit matInput placeholder="Address 1" [(ngModel)]='address1' maxlength="50">
+    </mat-form-field>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+    <mat-form-field>
+    <input matInput placeholder="Address 2" [(ngModel)]='address2' maxlength="50">
+    </mat-form-field>
+    <mat-form-field>
+    <input matInput placeholder="City"  [(ngModel)]='city' maxlength="20">
+    </mat-form-field>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+    <mat-form-field>
+    <input matInput placeholder="State" [(ngModel)]='state' maxlength="10">
+    </mat-form-field>
+    <mat-form-field>
+    <input matInput placeholder="Tel" [(ngModel)]='tel' maxlength="15">
+    </mat-form-field>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+    <mat-form-field>
+    <input matInput placeholder="Fax" [(ngModel)]='fax' maxlength="15">
+    </mat-form-field>
+    <mat-form-field>
+    <input matInput placeholder="Contact" [(ngModel)]=contact maxlength="50">
+    </mat-form-field>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+    
+    <mat-form-field style=" width: 100%;">
+       <textarea matInput #addmemo [(ngModel)]="addressmemo" rows=4 cols="20"
+       maxlength="100" placeholder="Memo" >
+    
+        </textarea>
+        <mat-hint align="start"><strong>Additional info</strong> </mat-hint>
+        <mat-hint align="end">{{addmemo.value.length}} / 100</mat-hint>
+    </mat-form-field>
+    
  <br>
-        <button matTooltip="Save Changed" (click)="EditMode(true)" class="card-link btn btn-sm btn-outline-success ">
+        <button matTooltip="Save Changed" (click)="SaveAddress()" class="card-link btn btn-sm btn-outline-success ">
             Save
         </button>
         <button matTooltip="Save as New" (click)="isAddresNew=!isAddresNew;" class="card-link btn btn-sm btn-outline-warning">
