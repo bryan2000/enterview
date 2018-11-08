@@ -324,6 +324,25 @@ addressCtrl=new FormControl('', [Validators.required]);
     this.EditMode(false);
   }
 
+  public NewAddress(){
+
+    this.newshippingaddrs.name=this.addrname;
+    this.newshippingaddrs.address1= this.address1;
+    this.newshippingaddrs.address2= this.address2;
+    this.newshippingaddrs.city= this.city;
+    this.newshippingaddrs.state= this.state;
+    this.newshippingaddrs.zipcode= this.zipcode;
+    this.newshippingaddrs.tel= this.tel;
+    this.newshippingaddrs.fax= this.fax;
+     this.newshippingaddrs.contact= this.contact;
+    this.newshippingaddrs.email= this.email;
+    this.newshippingaddrs.addressmemo= this.addressmemo;
+
+    this.loadAddress(null);
+    this.EditMode(false);
+    
+  }
+
   //////////////////////// Functions/////////////////////////////
   
   constructor(private quotSVC: QuotserviceService, public dialog:MatDialog, public snackBar: MatSnackBar) { ////////////////////////////////////////////////////////////////
@@ -337,7 +356,7 @@ addressCtrl=new FormControl('', [Validators.required]);
   allkd:boolean=false;
 
   isAddresedit:boolean=false;
-  selectaddressid:string='-1';
+ 
 
   
 
@@ -356,6 +375,7 @@ email:string;
 addressmemo:string;
 currenshippingaddrs: addressInfo;
 shippingaddresses:Observable<addressInfo[]>;
+newshippingaddrs:addressInfo;
 
 
 
