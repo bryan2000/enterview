@@ -383,7 +383,7 @@ if(addrs){
     this.currenshippingaddrs.tel= this.tel;
     this.currenshippingaddrs.altphone=this.altphone;
     this.currenshippingaddrs.fax= this.fax;
-     this.currenshippingaddrs.contact= this.contact;
+    this.currenshippingaddrs.contact= this.contact;
     this.currenshippingaddrs.email= this.email;
     this.currenshippingaddrs.addressmemo= this.addressmemo;
   }
@@ -422,7 +422,7 @@ public NewAddress(){
             state: this.state,
             zipcode: this.zipcode,
             tel: this.tel,
-            altphone:'',
+            altphone:this.altphone,
             fax: this.fax,
             contact: this.contact,
             email: this.email,
