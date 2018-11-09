@@ -106,7 +106,7 @@ addressCtrl=new FormControl('', [Validators.required]);
     this.quotSVC.removeQuoteItem(outitem);
     this.getQuoteItems();
     this.snackBar.open(this.fullQuotItemName(outitem)+' Removed!','Close',
-    {duration:3000,}
+    {duration:4000,}
     );
     this.subtotal();
   }
@@ -319,29 +319,6 @@ addressCtrl=new FormControl('', [Validators.required]);
 
   }
 
-  public SaveAddress(){
-    this.loadAddress(null);
-    this.EditMode(false);
-  }
-
-  public NewAddress(){
-
-    this.newshippingaddrs.name=this.addrname;
-    this.newshippingaddrs.address1= this.address1;
-    this.newshippingaddrs.address2= this.address2;
-    this.newshippingaddrs.city= this.city;
-    this.newshippingaddrs.state= this.state;
-    this.newshippingaddrs.zipcode= this.zipcode;
-    this.newshippingaddrs.tel= this.tel;
-    this.newshippingaddrs.fax= this.fax;
-     this.newshippingaddrs.contact= this.contact;
-    this.newshippingaddrs.email= this.email;
-    this.newshippingaddrs.addressmemo= this.addressmemo;
-
-    this.loadAddress(null);
-    this.EditMode(false);
-    
-  }
 
   //////////////////////// Functions/////////////////////////////
   
@@ -369,13 +346,14 @@ city:string;
 state:string;
 zipcode:string;
 tel:string;
+altphone:string;
 fax:string;
 contact:string;
 email:string;
 addressmemo:string;
 currenshippingaddrs: addressInfo;
 shippingaddresses:Observable<addressInfo[]>;
-newshippingaddrs:addressInfo;
+//newshippingaddrs:addressInfo;
 
 
 
@@ -390,6 +368,7 @@ if(addrs){
     this.state=addrs.state;
     this.zipcode=addrs.zipcode;
     this.tel=addrs.tel;
+    this.altphone=addrs.altphone;
     this.fax=addrs.fax;
     this.contact=addrs.contact;
     this.email=addrs.email;
@@ -402,6 +381,7 @@ if(addrs){
     this.currenshippingaddrs.state= this.state;
     this.currenshippingaddrs.zipcode= this.zipcode;
     this.currenshippingaddrs.tel= this.tel;
+    this.currenshippingaddrs.altphone=this.altphone;
     this.currenshippingaddrs.fax= this.fax;
      this.currenshippingaddrs.contact= this.contact;
     this.currenshippingaddrs.email= this.email;
@@ -410,22 +390,52 @@ if(addrs){
 }
 
 
-
 Addresschanged(addrid:string){
-console.log(addrid);
-if(addrid){
-      this.quotSVC.findAddress(addrid).subscribe(
-        shipadd=>{
-          if(shipadd){
-            this.currenshippingaddrs=shipadd;
-           this.loadAddress(shipadd);
+  if(addrid){
+        this.quotSVC.findAddress(addrid).subscribe(
+          shipadd=>{
+            if(shipadd){
+              this.currenshippingaddrs=shipadd;
+            this.loadAddress(shipadd);
+            }
           }
-        }
-      );
+        );
+  }
 }
 
 
+public SaveAddress(){
+  this.loadAddress(null);
+  this.EditMode(false);
+    this.snackBar.open(this.currenshippingaddrs.name+' Updated!','Close',
+  {duration:4000,verticalPosition: 'top',panelClass:['snackbaraddrs-edit'],}
+  );
 }
+
+public NewAddress(){
+  const newshippingaddrs:addressInfo={
+            addressid:'',
+            name:this.addrname,
+            address1: this.address1,
+            address2: this.address2,
+            city: this.city,
+            state: this.state,
+            zipcode: this.zipcode,
+            tel: this.tel,
+            altphone:'',
+            fax: this.fax,
+            contact: this.contact,
+            email: this.email,
+            addressmemo: this.addressmemo,
+          }
+  this.currenshippingaddrs= this.quotSVC.addAddress(newshippingaddrs);
+
+  this.EditMode(false);
+  this.snackBar.open(this.currenshippingaddrs.name+' Added!','Close',
+  {duration:4000,verticalPosition: 'top',panelClass:['snackbaraddrs-new'],}
+  );
+}
+
 
 //////////////////////// Functions/////////////////////////////
 
