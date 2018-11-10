@@ -51,7 +51,8 @@
                                   Fax: {{currenshippingaddrs.fax}}<br>
                                   Contact: <b> {{currenshippingaddrs.contact}}</b> 
                                   alt: &nbsp;&nbsp; {{currenshippingaddrs.altphone}} <br>
-                                  EMail: {{currenshippingaddrs.email}}
+                                  EMail: {{currenshippingaddrs.email}}<br> 
+                                  Delivery Fee: {{currenshippingaddrs.deliveryfee}}&nbsp;&nbsp; Free Amount:{{currenshippingaddrs.freedeliveryamt}}<br>
                                   Memo: {{currenshippingaddrs.addressmemo}}
                               </p>
                             
@@ -67,30 +68,38 @@
 
 <mat-form-field>
   <input #inptedit matInput placeholder="Address 1" [(ngModel)]='address1' maxlength="50">
-  </mat-form-field>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+  </mat-form-field>
   <mat-form-field>
   <input matInput placeholder="Address 2" [(ngModel)]='address2' maxlength="50">
   </mat-form-field>
   <mat-form-field>
   <input matInput placeholder="City"  [(ngModel)]='city' maxlength="20">
-  </mat-form-field>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+  </mat-form-field>
   <mat-form-field>
   <input matInput placeholder="State" [(ngModel)]='state' maxlength="10">
   </mat-form-field>
   <mat-form-field>
   <input matInput placeholder="Tel" [(ngModel)]='tel' maxlength="15">
-  </mat-form-field>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+  </mat-form-field>
 
   <mat-form-field>
   <input matInput placeholder="Fax" [(ngModel)]='fax' maxlength="15">
   </mat-form-field>
   <mat-form-field>
   <input matInput placeholder="Contact" [(ngModel)]='contact' maxlength="50">
-  </mat-form-field>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+  </mat-form-field>
   <mat-form-field>
     <input matInput placeholder="Alt Phone" [(ngModel)]='altphone' maxlength="15">
     </mat-form-field>  
-
+  <mat-form-field>
+    <input matInput placeholder="EMail" [(ngModel)]='email' maxlength="50">
+    </mat-form-field>  &nbsp;&nbsp;&nbsp;
+  <mat-form-field>
+    <input type="number" matInput placeholder="Delivery Fee" [(ngModel)]='deliveryfee' maxlength="10">
+    </mat-form-field>  
+  <mat-form-field>
+    <input type="number" matInput placeholder="Free Amount" [(ngModel)]='freedeliveryamt' maxlength="10">
+   </mat-form-field> 
   <mat-form-field style=" width: 100%;">
      <textarea matInput #addmemo [(ngModel)]="addressmemo" rows=4 cols="20"
      maxlength="100" placeholder="Memo" >
