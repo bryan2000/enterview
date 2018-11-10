@@ -182,9 +182,12 @@ addressCtrl=new FormControl('', [Validators.required]);
     this.quotsummary.accessary=0;
     this.quotsummary.others=0;
     this.quotsummary.discount=0;
-    this.quotsummary.deliveryfee=30;
+
     this.quotsummary.total=0;
     this.quotsummary.tax=0;
+
+
+   
     
     this.filteredQuoItems.subscribe(allitem=>{
       allitem.forEach(element => {
@@ -209,8 +212,17 @@ addressCtrl=new FormControl('', [Validators.required]);
   
   
       });
-      this.quotsummary.total=this.quotsummary.subtotal -this.quotsummary.discount
-          +this.quotsummary.deliveryfee+this.quotsummary.tax; 
+
+      var amt=this.quotsummary.subtotal -this.quotsummary.discount;
+  
+      if(this.freedeliveryamt>0 && amt> this.freedeliveryamt)
+      {       
+         this.quotsummary.total=amt+this.quotsummary.tax;
+         this.quotsummary.deliveryfee=0;
+      }else{
+        this.quotsummary.deliveryfee=this.deliveryfee;
+        this.quotsummary.total=amt+this.quotsummary.tax+this.quotsummary.deliveryfee;
+      }
     });
   
   
@@ -309,12 +321,13 @@ addressCtrl=new FormControl('', [Validators.required]);
   EditMode(ipt:boolean){
       this.isAddresedit=ipt;
       setTimeout(() => {
-        if(ipt){
-          this.inptclreditElement.nativeElement.focus();
-      this.inptclreditElement.nativeElement.select(); 
-         } else{
-         this.loadAddress(this.currenshippingaddrs);
-         }
+          if(ipt){
+            this.inptclreditElement.nativeElement.focus();
+        this.inptclreditElement.nativeElement.select(); 
+          } else{
+          this.loadAddress(this.currenshippingaddrs);
+
+          }
       }, 500);
 
   }
@@ -351,6 +364,8 @@ fax:string;
 contact:string;
 email:string;
 addressmemo:string;
+freedeliveryamt:number=0;
+deliveryfee:number=0;
 currenshippingaddrs: addressInfo;
 shippingaddresses:Observable<addressInfo[]>;
 //newshippingaddrs:addressInfo;
@@ -360,6 +375,7 @@ shippingaddresses:Observable<addressInfo[]>;
 ///////// shipping address ////  END  ///////////////////
 
 public loadAddress(addrs:addressInfo){
+   
 if(addrs){  
   this.addrname=addrs.name
     this.address1=addrs.address1;
@@ -373,6 +389,9 @@ if(addrs){
     this.contact=addrs.contact;
     this.email=addrs.email;
     this.addressmemo=addrs.addressmemo;
+    this.freedeliveryamt=addrs.freedeliveryamt;
+    this.deliveryfee=addrs.deliveryfee;
+    
     }else{    
       this.currenshippingaddrs.name=this.addrname;
     this.currenshippingaddrs.address1= this.address1;
@@ -386,7 +405,14 @@ if(addrs){
     this.currenshippingaddrs.contact= this.contact;
     this.currenshippingaddrs.email= this.email;
     this.currenshippingaddrs.addressmemo= this.addressmemo;
+    this.currenshippingaddrs.freedeliveryamt=this.freedeliveryamt;
+    this.currenshippingaddrs.deliveryfee=this.deliveryfee;
   }
+    //////////////// Reflesh Total////////////////////
+    this.quotsummary.deliveryfee=this.deliveryfee;
+    this.subtotal();
+    //////////////// Reflesh Total /////////////////////
+
 }
 
 
@@ -396,7 +422,7 @@ Addresschanged(addrid:string){
           shipadd=>{
             if(shipadd){
               this.currenshippingaddrs=shipadd;
-            this.loadAddress(shipadd);
+            this.loadAddress(shipadd);           
             }
           }
         );
@@ -407,7 +433,7 @@ Addresschanged(addrid:string){
 public SaveAddress(){
   this.loadAddress(null);
   this.EditMode(false);
-    this.snackBar.open(this.currenshippingaddrs.name+' Updated!','Close',
+  this.snackBar.open(this.currenshippingaddrs.name+' Updated!','Close',
   {duration:4000,verticalPosition: 'top',panelClass:['snackbaraddrs-edit'],}
   );
 }
@@ -427,9 +453,10 @@ public NewAddress(){
             contact: this.contact,
             email: this.email,
             addressmemo: this.addressmemo,
+            freedeliveryamt: this.freedeliveryamt,
+            deliveryfee: this.deliveryfee,
           }
   this.currenshippingaddrs= this.quotSVC.addAddress(newshippingaddrs);
-
   this.EditMode(false);
   this.snackBar.open(this.currenshippingaddrs.name+' Added!','Close',
   {duration:4000,verticalPosition: 'top',panelClass:['snackbaraddrs-new'],}
