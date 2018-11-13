@@ -1,0 +1,195 @@
+<div  id="print-section" class="printSection">
+<h1 mat-dialog-title> Print Quote# 123456</h1>
+
+<div mat-dialog-content style="min-width:600px; overflow: visible;">
+    <div flex="" layout-padding="">
+        <div class="invoice-box">  
+         <table cellpadding="0" cellspacing="0"> 
+         <tr class="top"> 
+         <td colspan="2"> 
+         <table> 
+         <tr> 
+         <td class="title"> 
+         <img src="http://nextstepwebs.com/images/logo.png" style="width:100%; max-width:300px;"> 
+         </td> 
+         <td> 
+         Invoice #: 123<br> 
+         Created: January 1, 2015<br> 
+         Due: February 1, 2015 
+         </td> 
+         </tr> 
+         </table> 
+         </td> 
+         </tr> 
+         <tr class="information"> 
+         <td colspan="2"> 
+         <table> 
+         <tr> 
+         <td> 
+         Next Step Webs, Inc.<br> 
+         12345 Sunny Road<br> 
+         Sunnyville, TX 12345 
+         </td> 
+         <td> 
+         Acme Corp.<br> 
+         John Doe<br> 
+         john@example.com 
+         </td> 
+         </tr> 
+         </table> 
+         </td> 
+         </tr> 
+         <tr class="heading"> 
+         <td> 
+         Payment Method 
+         </td> 
+         <td> 
+         Check # 
+         </td> 
+         </tr> 
+         <tr class="details"> 
+         <td> 
+         Check 
+         </td> 
+         <td> 
+         1000 
+         </td> 
+         </tr> 
+         <tr class="heading"> 
+         <td> 
+         Item 
+         </td> 
+         <td> 
+         Price 
+         </td> 
+         </tr> 
+         <tr class="item"> 
+         <td> 
+         Website design 
+         </td> 
+         <td> 
+         300 
+         </td> 
+         </tr> 
+         <tr class="item"> 
+         <td> 
+         Hosting (3 months) 
+         </td> 
+         <td> 
+         75 
+         </td> 
+         </tr> 
+         <tr class="item last"> 
+         <td> 
+         Domain name (1 year) 
+         </td> 
+        <td> 
+         10 
+         </td> 
+         </tr> 
+         <tr class="total"> 
+         <td></td> 
+         <td> 
+         Total: $385.00 
+         </td> 
+         </tr> 
+         </table> 
+        </div>  
+       
+
+        <table class="table table-sm table-hover ">
+                <thead class="thead-light">
+                    <tr>
+                           
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Style </th>
+                        <th scope="col">ITEM</th>
+                        <th scope="col">L/R</th>
+                        <th scope="col">KD</th>
+                        <th scope="col">
+                            <span *ngIf="data.displayprice">PRICE</span>
+                        </th>            
+                        <th scope="col">
+                            <span *ngIf="data.displayprice">  
+                            Amount
+                            </span>
+                        </th>
+                        <th scope="col">Stock</th>
+                
+                            <th scope="col"></th>      
+                            <th scope="col">SEQU</th>           
+                    </tr>
+                </thead>
+                <tbody>
+                    
+          <tr *ngFor="let quitem of data.entries | async ; let i=index">
+         
+                  
+                <td>                       
+                   {{quitem.qty}} 
+                </td>
+                <td>                   
+                    <span>{{quitem.stylecode}}</span>
+                </td>
+                <td><b>{{quitem.code}} </b></td>
+                <td>
+                    <span *ngIf="quitem.rqside">
+                    {{quitem.side |uppercase}}
+                    </span>
+                </td>
+    
+    
+                <td>
+                    <span *ngIf="quitem.rqkd">
+                     {{quitem.kd?'KD':'ASSM'}}     
+                    </span>
+                    </td>
+                    <td >
+                        <span *ngIf="data.displayprice">
+                        <b> {{(quitem.kd? quitem.price2 : quitem.price) | currency}}</b>                               
+
+                        </span>                 
+                    </td>  
+                    <td>   
+                        <span *ngIf="data.displayprice">                       
+                        {{ quitem.qty *( quitem.kd? quitem.price2 : quitem.price )  | currency}}
+                        </span>
+                    </td>
+    
+                <td>
+                    <div [ngSwitch]="quitem?.stock">
+                        <b *ngSwitchCase="'inStock'" class="text-success">{{quitem.stock}}</b>               
+                        <b *ngSwitchCase="'Low'" class="text-warning">{{quitem.stock}}</b>               
+                        <b *ngSwitchCase="'Out'" class="text-danger">{{quitem.stock}}</b>               
+                    </div>
+                </td>
+
+                <td>
+
+                </td>
+                <td>{{i}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+</div>
+
+</div> <!-- Print Section -->
+
+<div mat-dialog-actions 
+[style.visibility]="printing ? 'visible' : 'hidden'"
+>
+
+<button mat-button cdkFocusInitial (click)="onNoClick()">Not Sure</button>
+<button mat-button [mat-dialog-close]="true">OK</button>
+<button md-button class="md-raised md-primary"  (click)="toPrint()">Print</button>
+
+</div>
+  
+  
+  
+  
+  
