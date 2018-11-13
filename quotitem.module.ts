@@ -6,7 +6,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BaseMaterialModule} from '../material-module';
 
 
-import {QuotitemComponent,Quotitemdialog } from './quotitemlist/quotitem.component'
+import {QuotitemComponent,Quotitemdialog,Quotitemprint } from './quotitemlist/quotitem.component'
 
 
 import {QuotitemRoutingModule} from './quotitem-routing.module';
@@ -29,11 +29,13 @@ import {QuotitemRoutingModule} from './quotitem-routing.module';
     QuotitemComponent,
     
     Quotitemdialog,
+    Quotitemprint,
   ],
 
     entryComponents: [
       QuotitemComponent,      
       Quotitemdialog,
+      Quotitemprint,
     ],
 })
 export class QuotitemModule { }
