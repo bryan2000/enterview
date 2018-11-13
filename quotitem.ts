@@ -296,6 +296,20 @@ addressCtrl=new FormControl('', [Validators.required]);
   });
   }
 
+  toPrint():void{
+    
+    const dialogRef = this.dialog.open(Quotitemprint, {
+      width: '80%', //'250px',
+      data: {
+          id: 'quo2it123',
+          name: 'ABC',
+          descr:'After You Click OK,  this item will be delete. Are you sure?',
+          displayprice:this.displayprice,
+          entries:this.filteredQuoItems,
+          },
+    });
+  }
+
 
 
 
@@ -502,6 +516,7 @@ export interface DialogData {
 id: string;
 name: string;
 descr: string;
+
 }
 @Component({
 selector:'app-quotitemdialog',
@@ -515,10 +530,44 @@ constructor(public dialogRef: MatDialogRef<Quotitemdialog>,
  onNoClick(): void{
    this.dialogRef.close();
  }
+
 }
 
 
+export interface PrintData {
+id: string;
+name: string;
+descr: string;
+displayprice:boolean;
+entries: Observable<quotItem[]>;
+}
+@Component({
+selector:'app-quotitemprint',
+templateUrl:'./quotitemprint.html',
+styleUrls:['./quotitemprint.css'],
+})
 
+export class Quotitemprint {
+
+  printing:boolean=true;
+
+constructor(public dialogRef: MatDialogRef<Quotitemprint>,
+ @Inject(MAT_DIALOG_DATA) public data: PrintData
+ ){}
+ onNoClick(): void{
+   this.dialogRef.close();
+ }
+ toPrint(){
+   this.printing=false;
+   
+
+    setTimeout(() => {
+       window.print();
+          this.printing=true;
+    }, 500);
+
+  }
+}
 
 
 
