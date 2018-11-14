@@ -1,7 +1,7 @@
 <div  id="print-section" class="printSection">
 <h1 mat-dialog-title> Print Quote# 123456</h1>
 
-<div mat-dialog-content style="min-width:600px; overflow: visible;">
+<div mat-dialog-content style="min-width:600px; ">
     <div flex="" layout-padding="">
         <div class="invoice-box">  
          <table cellpadding="0" cellspacing="0"> 
@@ -94,8 +94,10 @@
          </td> 
          </tr> 
          </table> 
-        </div>  
-       
+
+
+
+
 
         <table class="table table-sm table-hover ">
                 <thead class="thead-light">
@@ -114,15 +116,14 @@
                             Amount
                             </span>
                         </th>
-                        <th scope="col">Stock</th>
-                
+
                             <th scope="col"></th>      
                             <th scope="col">SEQU</th>           
                     </tr>
                 </thead>
                 <tbody>
                     
-          <tr *ngFor="let quitem of data.entries | async ; let i=index">
+          <tr *ngFor="let quitem of data.entries | async ; let i=index"  class="item">
          
                   
                 <td>                       
@@ -156,13 +157,7 @@
                         </span>
                     </td>
     
-                <td>
-                    <div [ngSwitch]="quitem?.stock">
-                        <b *ngSwitchCase="'inStock'" class="text-success">{{quitem.stock}}</b>               
-                        <b *ngSwitchCase="'Low'" class="text-warning">{{quitem.stock}}</b>               
-                        <b *ngSwitchCase="'Out'" class="text-danger">{{quitem.stock}}</b>               
-                    </div>
-                </td>
+
 
                 <td>
 
@@ -170,8 +165,14 @@
                 <td>{{i}}</td>
                 </tr>
             </tbody>
+            <tfoot><tr><td>End of Page</td></tr></tfoot>
         </table>
 
+
+
+         
+        </div> <!--Class end-->  
+       
 
     </div>
 
@@ -188,8 +189,8 @@
 <button md-button class="md-raised md-primary"  (click)="toPrint()">Print</button>
 
 </div>
-  
-  <iframe #iframe frameborder="1" width="100%" height="50%"></iframe>
+
+<iframe #iframeprint frameborder="1" width="100%" height="50%" style=" position:absolute; top:-1000000px;"></iframe>
   
   
   
