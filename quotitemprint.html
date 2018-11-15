@@ -1,98 +1,80 @@
 <div  id="print-section" class="printSection">
-<h1 mat-dialog-title> Print Quote# 123456</h1>
 
-<div mat-dialog-content style="min-width:600px; ">
+ <h1 mat-dialog-title> </h1>
+<div mat-dialog-content style="min-width:400px; ">
     <div flex="" layout-padding="">
         <div class="invoice-box">  
          <table cellpadding="0" cellspacing="0"> 
-         <tr class="top"> 
-         <td colspan="2"> 
-         <table> 
-         <tr> 
-         <td class="title"> 
-         <img src="http://nextstepwebs.com/images/logo.png" style="width:100%; max-width:300px;"> 
-         </td> 
-         <td> 
-         Invoice #: 123<br> 
-         Created: January 1, 2015<br> 
-         Due: February 1, 2015 
-         </td> 
-         </tr> 
-         </table> 
-         </td> 
-         </tr> 
-         <tr class="information"> 
-         <td colspan="2"> 
-         <table> 
-         <tr> 
-         <td> 
-         Next Step Webs, Inc.<br> 
-         12345 Sunny Road<br> 
-         Sunnyville, TX 12345 
-         </td> 
-         <td> 
-         Acme Corp.<br> 
-         John Doe<br> 
-         john@example.com 
-         </td> 
-         </tr> 
-         </table> 
-         </td> 
-         </tr> 
-         <tr class="heading"> 
-         <td> 
-         Payment Method 
-         </td> 
-         <td> 
-         Check # 
-         </td> 
-         </tr> 
-         <tr class="details"> 
-         <td> 
-         Check 
-         </td> 
-         <td> 
-         1000 
-         </td> 
-         </tr> 
-         <tr class="heading"> 
-         <td> 
-         Item 
-         </td> 
-         <td> 
-         Price 
-         </td> 
-         </tr> 
-         <tr class="item"> 
-         <td> 
-         Website design 
-         </td> 
-         <td> 
-         300 
-         </td> 
-         </tr> 
-         <tr class="item"> 
-         <td> 
-         Hosting (3 months) 
-         </td> 
-         <td> 
-         75 
-         </td> 
-         </tr> 
-         <tr class="item last"> 
-         <td> 
-         Domain name (1 year) 
-         </td> 
-        <td> 
-         10 
-         </td> 
-         </tr> 
-         <tr class="total"> 
-         <td></td> 
-         <td> 
-         Total: $385.00 
-         </td> 
-         </tr> 
+            <tr class="top"> 
+                <td colspan="2"> 
+                    <table> 
+                        <tr> 
+                
+                        <td>
+                         <span  class="headleft"> Quote# 123456   </span><br>
+                        
+                           <b>
+                               Majestic<br>
+                                241 59 Street <br>
+                                Brooklyn NY 11220<br>                                   
+                                TEL:718-833-8808<br>
+                                FAX:718-853-5014                        
+                           </b>
+                        </td>
+                        <td>
+                                <b>King's Custom Cabinets Corp</b> <br>
+                                130-06 Atlantic Avenue<br>
+                                TEL:718-847-4424<br>
+                                FAX:718-805-8572  
+
+                        </td> 
+                        </tr> 
+                        <tr>
+                            <td colspan="2">
+                                <hr>
+                            </td>
+                        </tr>
+                    </table> 
+                </td> 
+            </tr> 
+            <tr class="heading"> 
+                    <td> 
+                    PO 
+                    </td> 
+
+                    <td> 
+                    Reference 
+                    </td> 
+
+                </tr> 
+                    <tr class="item"> 
+                    <td>
+                    ABC
+                    </td>
+ 
+                    <td> 
+                    2019
+                    </td> 
+                </tr> 
+            <tr class="heading"> 
+
+                    <td>
+                    ETA Date
+                    </td>
+                    <td> 
+                     
+                    </td> 
+
+                </tr> 
+                    <tr class="item"> 
+                    <td> 
+                    12/15/18 
+                    </td> 
+                    <td> 
+                    
+                    </td> 
+                </tr> 
+                
          </table> 
 
 
@@ -117,7 +99,7 @@
                             </span>
                         </th>
 
-                            <th scope="col"></th>      
+                          
                             <th scope="col">SEQU</th>           
                     </tr>
                 </thead>
@@ -129,8 +111,8 @@
                 <td>                       
                    {{quitem.qty}} 
                 </td>
-                <td>                   
-                    <span>{{quitem.stylecode}}</span>
+                <td style="text-align:left">                   
+                    <span >{{quitem.stylecode}}</span>
                 </td>
                 <td><b>{{quitem.code}} </b></td>
                 <td>
@@ -159,16 +141,74 @@
     
 
 
-                <td>
-
-                </td>
+               
                 <td>{{i}}</td>
                 </tr>
             </tbody>
-            <tfoot><tr><td>End of Page</td></tr></tfoot>
+            <tfoot><tr><td colspan="8" style="text-align:center"> Print Quote# 123456</td></tr></tfoot>
         </table>
 
-
+        <table>
+                <tr class="information"> 
+                        <td colspan="2"> 
+                      
+                        </td> 
+                    </tr> 
+                    <tr class="heading"> 
+                        <td> 
+                        Payment Method 
+                        </td> 
+                        <td> 
+                        Check # 
+                        </td> 
+                    </tr> 
+                    <tr class="details"> 
+                        <td> 
+                        Check 
+                        </td> 
+                        <td> 
+                        1000 
+                        </td> 
+                    </tr> 
+                    <tr class="heading"> 
+                        <td> 
+                        Item 
+                        </td> 
+                        <td> 
+                        Price 
+                        </td> 
+                    </tr> 
+                        <tr class="item"> 
+                        <td> 
+                        Website design 
+                        </td> 
+                        <td> 
+                        300 
+                        </td> 
+                    </tr> 
+                    <tr class="item"> 
+                    <td> 
+                    Hosting (3 months) 
+                    </td> 
+                    <td> 
+                    75 
+                    </td> 
+                    </tr> 
+                    <tr class="item last"> 
+                    <td> 
+                    Domain name (1 year) 
+                    </td> 
+                    <td> 
+                    10 
+                    </td> 
+                    </tr> 
+                    <tr class="total"> 
+                    <td></td> 
+                    <td> 
+                    Total: $385.00 
+                    </td> 
+                    </tr>             
+        </table>
 
          
         </div> <!--Class end-->  
@@ -182,11 +222,17 @@
 
 <div mat-dialog-actions 
 [style.visibility]="printing ? 'visible' : 'hidden'"
+style=" float:right; "
 >
 
-<button mat-button cdkFocusInitial (click)="onNoClick()">Not Sure</button>
-<button mat-button [mat-dialog-close]="true">OK</button>
-<button md-button class="md-raised md-primary"  (click)="toPrint()">Print</button>
+<button md-button cdkFocusInitial class="btn btn-sm  btn-outline-primary "  (click)="toPrint()">
+    Print
+</button>
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+<button class="btn btn-sm btn-outline-dark " (click)="onNoClick()">
+    Not Now
+</button>
 
 </div>
 
