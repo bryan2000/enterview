@@ -31,8 +31,8 @@
     }
     
     .invoice-box table tr.top table td.title{
-        font-size:45px;
-        line-height:45px;
+        font-size:25px;
+        line-height:35px;
         color:#333;
     }
     
@@ -76,4 +76,18 @@
             text-align:center;
         }
     }
+
+    .headleft{
+        font-size:25px;
+        line-height:35px;
+        color:#333;
+    }
+
+    .headleftaddress{
+        font-size:15px;
+        line-height:25px;
+        color:#333;
+    }
    
+   
+    
