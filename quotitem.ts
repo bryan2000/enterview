@@ -306,6 +306,7 @@ addressCtrl=new FormControl('', [Validators.required]);
           descr:'After You Click OK,  this item will be delete. Are you sure?',
           displayprice:this.displayprice,
           entries:this.filteredQuoItems,
+          summary:this.quotsummary, 
           },
     });
   }
@@ -540,6 +541,7 @@ name: string;
 descr: string;
 displayprice:boolean;
 entries: Observable<quotItem[]>;
+  summary:quotItemSummary;
 }
 @Component({
 selector:'app-quotitemprint',
