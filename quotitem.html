@@ -127,9 +127,7 @@
                   </div>
               </div>
           </div>
-     <button matTooltip="Print Quote" (click)="toPrint()" class="card-link btn btn-sm btn-outline-warning">
-        Print
-    </button>     
+ 
 <hr>
 
 
@@ -150,7 +148,11 @@
           <button matTooltip="All KD" value=" KD" (click)="kdAssambled(true)" type="button" class="btn btn-outline-secondary btn-sm">
                   <mat-icon md-18>inbox</mat-icon> KD</button>
           <button  matTooltip="All Assambled" value="Assambled" (click)="kdAssambled(false)" type="button" class="btn btn-outline-success btn-sm">
-                  <mat-icon>gavel</mat-icon> Assambled</button>
+                  <mat-icon>gavel</mat-icon> Assambled
+          </button>
+          <button matTooltip="Print Quote" (click)="toPrint()" class=" btn btn-sm btn-outline-info">
+                <mat-icon>print</mat-icon> Print
+          </button>  
       </div>
 
       
