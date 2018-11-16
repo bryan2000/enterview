@@ -11,7 +11,7 @@
                         <tr> 
                 
                         <td>
-                         <span  class="headleft"> Quote# 123456   </span><br>
+                         <span  class="headleft"><b>Pending</b>  #123456</span><br>
                         
                            <b>
                                Majestic<br>
@@ -29,11 +29,7 @@
 
                         </td> 
                         </tr> 
-                        <tr>
-                            <td colspan="2">
-                                <hr>
-                            </td>
-                        </tr>
+
                     </table> 
                 </td> 
             </tr> 
@@ -66,7 +62,7 @@
                     </td> 
 
                 </tr> 
-                    <tr class="item"> 
+                <tr class="item"> 
                     <td> 
                     12/15/18 
                     </td> 
@@ -74,10 +70,10 @@
                     
                     </td> 
                 </tr> 
-                
+     
          </table> 
 
-
+         <br>
 
 
 
@@ -145,7 +141,7 @@
                 <td>{{i}}</td>
                 </tr>
             </tbody>
-            <tfoot><tr><td colspan="8" style="text-align:center"> Print Quote# 123456</td></tr></tfoot>
+            <tfoot><tr><td colspan="8" style="text-align:center"> Printing #123456</td></tr></tfoot>
         </table>
 
         <table>
@@ -153,61 +149,99 @@
                         <td colspan="2"> 
                       
                         </td> 
-                    </tr> 
-                    <tr class="heading"> 
+                </tr> 
+                    <tr class="heading" > 
                         <td> 
-                        Payment Method 
+                        Class
                         </td> 
                         <td> 
-                        Check # 
+                        QTY 
                         </td> 
                     </tr> 
                     <tr class="details"> 
                         <td> 
-                        Check 
+                        Cabinet
                         </td> 
                         <td> 
-                        1000 
+                        {{data.summary.cabinet}} 
                         </td> 
                     </tr> 
-                    <tr class="heading"> 
+                    <tr class="details"> 
                         <td> 
-                        Item 
-                        </td> 
-                        <td> 
-                        Price 
-                        </td> 
-                    </tr> 
-                        <tr class="item"> 
-                        <td> 
-                        Website design 
+                        Accessary
                         </td> 
                         <td> 
-                        300 
+                        {{data.summary.accessary}} 
                         </td> 
                     </tr> 
-                    <tr class="item"> 
-                    <td> 
-                    Hosting (3 months) 
-                    </td> 
-                    <td> 
-                    75 
-                    </td> 
+                    <tr class="details"> 
+                        <td> 
+                        Others
+                        </td> 
+                        <td> 
+                        {{data.summary.others}} 
+                        </td> 
                     </tr> 
-                    <tr class="item last"> 
-                    <td> 
-                    Domain name (1 year) 
-                    </td> 
-                    <td> 
-                    10 
-                    </td> 
+                    <tr class="details"> 
+                        <td> 
+                        Total Piece(s)
+                        </td> 
+                        <td> 
+                        {{data.summary.totalpiece}} 
+                        </td> 
                     </tr> 
-                    <tr class="total"> 
-                    <td></td> 
-                    <td> 
-                    Total: $385.00 
-                    </td> 
-                    </tr>             
+        </table>
+        <table  *ngIf="data.displayprice">
+            <tr class="heading"> 
+                        <td> 
+                        Summary 
+                        </td> 
+                        <td> 
+                         
+                        </td> 
+            </tr> 
+            <tr class="item"> 
+                <td> 
+                Subtotal 
+                </td> 
+                <td> 
+                {{data.summary.subtotal | currency}}
+                </td> 
+            </tr> 
+            <tr class="item"> 
+                <td> 
+                Discount
+                </td> 
+                <td> 
+                {{data.summary.discount | currency}} 
+                </td> 
+            </tr>
+            <tr class="item"> 
+                <td> 
+                Sales Tax
+                </td> 
+                <td> 
+                {{data.summary.tax | currency}} 
+                </td> 
+            </tr>                      
+
+            <tr class="item last"> 
+                <td>Delivery Fee</td> 
+                <td> 
+                {{data.summary.deliveryfee | currency}}
+                </td> 
+            </tr>  
+
+            <tr class="total"> 
+                <td> 
+                Total
+                </td> 
+                <td> 
+                {{data.summary.total | currency}} 
+                </td> 
+            </tr> 
+                    
+
         </table>
 
          
