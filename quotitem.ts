@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 
 import {QuotserviceService,} from '../quotservice.service'
-import {styleCode,stockItem,quotItem,quotItemSummary,addressInfo} from '../datainterface';
+import {styleCode,stockItem,quotItem,quotItemSummary,addressInfo,quotHeader} from '../datainterface';
 import {FormControl, Validators} from '@angular/forms'
 import { Observable} from 'rxjs';
 
@@ -269,8 +269,23 @@ addressCtrl=new FormControl('', [Validators.required]);
  
   //this.loadAddress(null);
   this.Addresschanged('st1000');
+
+  this.loadQuot('9950');
+  
   }
   
+  public loadQuot(quotid:string):void{
+      this.quotheader={
+        quotid:'1',
+        po:'9950',
+        reference:'1997',
+        etadate:'12/10/2018',
+        quotdate:'11/17/2018',
+        displayprice:true,
+        fullkd:true,
+      };
+    
+  }
   
   slidetoggle(st: quotItem ){
     st.side=(st.side.toLowerCase()==='left'?'right':'left');
@@ -304,7 +319,7 @@ addressCtrl=new FormControl('', [Validators.required]);
           id: 'quo2it123',
           name: 'ABC',
           descr:'After You Click OK,  this item will be delete. Are you sure?',
-          displayprice:this.displayprice,
+          displayprice:this.quotheader.displayprice,
           entries:this.filteredQuoItems,
           summary:this.quotsummary, 
           },
@@ -355,7 +370,7 @@ addressCtrl=new FormControl('', [Validators.required]);
     }
   
   fullkd: boolean=false;
-  displayprice: boolean=true;
+  
   displaydescr: boolean=false;
   totalPrice: number=0;
   allkd:boolean=false;
@@ -384,7 +399,7 @@ deliveryfee:number=0;
 currenshippingaddrs: addressInfo;
 shippingaddresses:Observable<addressInfo[]>;
 //newshippingaddrs:addressInfo;
-
+quotheader:quotHeader;
 
 
 ///////// shipping address ////  END  ///////////////////
