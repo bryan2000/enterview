@@ -10,7 +10,7 @@
               <div class="col-md  bill">
                   <div class="card">
                       <div class="card-body">
-                          <h5 class="card-title">QU# 9950</h5>
+                          <h5 class="card-title">QU# {{quotheader.quotid}}</h5>
                           <h6 class="card-subtitle mb-2 text-muted">Majestic (688)</h6>
 
                           <p class="card-text">
@@ -126,14 +126,57 @@
                       </div>
                   </div>
               </div>
+
           </div>
- 
+  
 <hr>
 
 
+<div class="row">
 
 
+    <div class="col-md  ">
+        <div class="form-group ">
+            <input type="text" class="form-control " [(ngModel)]="quotheader.po" placeholder="PO Number" />
+            
+        </div>
+    </div>
 
+    <div class="col-md ">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> Date</span>
+            </div>
+            <input type="date" class="form-control input-md" [(ngModel)]="quotheader.quotdate" >
+        </div>
+    </div>
+</div>
+<hr>
+
+
+<div class="row">
+
+
+    <div class="col-md  ">
+        <div class="form-group ">
+            <input type="text" class="form-control " [(ngModel)]="quotheader.reference" placeholder="Reference" />
+            
+        </div>
+    </div>
+
+    <div class="col-md ">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend">
+                <span class="input-group-text">ETA Date</span>
+            </div>
+            <input type="date" class="form-control input-md" [(ngModel)]="quotheader.etadate" >
+
+        </div>
+    </div>
+
+</div>
+
+<hr>
 
 
     
@@ -141,18 +184,18 @@
 
       <div class="col-md-2" style="padding: 0px 3px 3px 15px;">
             <img *ngIf="selectedstyle" height="35" style="padding:5px;" [src]="selectedstyle.img">
-             <mat-checkbox  [(ngModel)]="displayprice">Display Price </mat-checkbox>
+             <mat-checkbox  [(ngModel)]="quotheader.displayprice">Display Price </mat-checkbox>
+
       </div>  
 
       <div class="col-md-3">
-          <button matTooltip="All KD" value=" KD" (click)="kdAssambled(true)" type="button" class="btn btn-outline-secondary btn-sm">
+            <button matTooltip="All KD" value=" KD" (click)="kdAssambled(true)" type="button" class="btn btn-outline-secondary btn-sm">
                   <mat-icon md-18>inbox</mat-icon> KD</button>
-          <button  matTooltip="All Assambled" value="Assambled" (click)="kdAssambled(false)" type="button" class="btn btn-outline-success btn-sm">
-                  <mat-icon>gavel</mat-icon> Assambled
-          </button>
-          <button matTooltip="Print Quote" (click)="toPrint()" class=" btn btn-sm btn-outline-info">
-                <mat-icon>print</mat-icon> Print
-          </button>  
+            <button  matTooltip="All Assambled" value="Assambled" (click)="kdAssambled(false)" type="button" class="btn btn-outline-success btn-sm">
+                  <mat-icon>gavel</mat-icon> Assambled</button>
+            <button  (click)="toPrint()" class=" btn btn-sm btn-outline-info">
+                    <mat-icon>print</mat-icon> Print
+            </button>                   
       </div>
 
       
@@ -161,6 +204,7 @@
          <b class="text-danger">{{errtxt}}</b>
       </div>   
    </div>
+
 
 <section id="divitementer">
 
@@ -232,10 +276,10 @@
                   <th scope="col">L/R</th>
                   <th scope="col">KD</th>
                   <th scope="col">
-                      <span *ngIf="displayprice">PRICE</span>
+                      <span *ngIf="quotheader.displayprice">PRICE</span>
                   </th>            
                   <th scope="col">
-                      <span *ngIf="displayprice">  
+                      <span *ngIf="quotheader.displayprice">  
                       Amount
                       </span>
                   </th>
@@ -290,13 +334,13 @@
                           </span>
                       </td>
                       <td >
-                          <span *ngIf="displayprice">
+                          <span *ngIf="quotheader.displayprice">
                           <b> {{(quitem.kd? quitem.price2 : quitem.price) | currency}}</b>                               
 
                           </span>                 
                       </td>  
                       <td>   
-                          <span *ngIf="displayprice">                       
+                          <span *ngIf="quotheader.displayprice">                       
                           {{ quitem.qty *( quitem.kd? quitem.price2 : quitem.price )  | currency}}
                           </span>
                       </td>
@@ -367,12 +411,12 @@
               <div class="col-4 col-sm">{{quotsummary.others}}</div>
           </div>
           <div class="row border">
-              <div class="col-6 col-sm text-right">Tatal Piece(s):</div>
+              <div class="col-6 col-sm text-right">Total Piece(s):</div>
               <div class="col-4 col-sm">{{quotsummary.totalpiece}}</div>
           </div>                
 
               
-      <div  *ngIf="displayprice" >
+      <div  *ngIf="quotheader.displayprice" >
           <div class="row border">
               <div class="col-8 col-sm-6 text-right">
                   <b>Subtotal:  </b>
