@@ -1,278 +1,284 @@
-<div  id="print-section" class="printSection">
+<div id="print-section" class="printSection">
 
- <h1 mat-dialog-title> </h1>
-<div mat-dialog-content style="min-width:400px; ">
-    <div flex="" layout-padding="">
-        <div class="invoice-box">  
-         <table cellpadding="0" cellspacing="0"> 
-            <tr class="top"> 
-                <td colspan="2"> 
-                    <table> 
-                        <tr> 
-                
+    <h1 mat-dialog-title> </h1>
+    <div mat-dialog-content style="min-width:400px; ">
+        <div flex="" layout-padding="">
+            <div class="invoice-box">
+                <table cellpadding="0" cellspacing="0">
+                    <tr class="top">
+                        <td colspan="2">
+                            <table>
+                                <tr>
+
+                                    <td>
+                                        <span class="headleft"><b>Pending</b> #9950</span><br>
+
+                                        <b>
+                                            Majestic<br>
+                                            241 59 Street <br>
+                                            Brooklyn NY 11220<br>
+                                            TEL:718-833-8808<br>
+                                            FAX:718-853-5014
+                                        </b>
+                                    </td>
+                                    <td>
+                                        <b>King's Custom Cabinets Corp</b> <br>
+                                        130-06 Atlantic Avenue<br>
+                                        TEL:718-847-4424<br>
+                                        FAX:718-805-8572
+
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                    <tr class="heading">
                         <td>
-                         <span  class="headleft"><b>Pending</b>  #123456</span><br>
-                        
-                           <b>
-                               Majestic<br>
-                                241 59 Street <br>
-                                Brooklyn NY 11220<br>                                   
-                                TEL:718-833-8808<br>
-                                FAX:718-853-5014                        
-                           </b>
+                            PO
+                        </td>
+
+                        <td>
+                            Reference
+                        </td>
+
+                    </tr>
+                    <tr class="item">
+                        <td>
+                            ABC
+                        </td>
+
+                        <td>
+                            2019
+                        </td>
+                    </tr>
+                    <tr class="heading">
+
+                        <td>
+                            ETA Date
                         </td>
                         <td>
-                                <b>King's Custom Cabinets Corp</b> <br>
-                                130-06 Atlantic Avenue<br>
-                                TEL:718-847-4424<br>
-                                FAX:718-805-8572  
 
-                        </td> 
-                        </tr> 
+                        </td>
 
-                    </table> 
-                </td> 
-            </tr> 
-            <tr class="heading"> 
-                    <td> 
-                    PO 
-                    </td> 
-
-                    <td> 
-                    Reference 
-                    </td> 
-
-                </tr> 
-                    <tr class="item"> 
-                    <td>
-                    ABC
-                    </td>
- 
-                    <td> 
-                    2019
-                    </td> 
-                </tr> 
-            <tr class="heading"> 
-
-                    <td>
-                    ETA Date
-                    </td>
-                    <td> 
-                     
-                    </td> 
-
-                </tr> 
-                <tr class="item"> 
-                    <td> 
-                    12/15/18 
-                    </td> 
-                    <td> 
-                    
-                    </td> 
-                </tr> 
-     
-         </table> 
-
-         <br>
-
-
-
-        <table class="table table-sm table-hover ">
-                <thead class="thead-light">
-                    <tr>
-                           
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Style </th>
-                        <th scope="col">ITEM</th>
-                        <th scope="col">L/R</th>
-                        <th scope="col">KD</th>
-                        <th scope="col">
-                            <span *ngIf="data.displayprice">PRICE</span>
-                        </th>            
-                        <th scope="col">
-                            <span *ngIf="data.displayprice">  
-                            Amount
-                            </span>
-                        </th>
-
-                          
-                            <th scope="col">SEQU</th>           
                     </tr>
-                </thead>
-                <tbody>
-                    
-          <tr *ngFor="let quitem of data.entries | async ; let i=index"  class="item">
-         
-                  
-                <td>                       
-                   {{quitem.qty}} 
-                </td>
-                <td style="text-align:left">                   
-                    <span >{{quitem.stylecode}}</span>
-                </td>
-                <td><b>{{quitem.code}} </b></td>
-                <td>
-                    <span *ngIf="quitem.rqside">
-                    {{quitem.side |uppercase}}
-                    </span>
-                </td>
-    
-    
-                <td>
-                    <span *ngIf="quitem.rqkd">
-                     {{quitem.kd?'KD':'ASSM'}}     
-                    </span>
-                    </td>
-                    <td >
-                        <span *ngIf="data.displayprice">
-                        <b> {{(quitem.kd? quitem.price2 : quitem.price) | currency}}</b>                               
+                    <tr class="item">
+                        <td>
+                            12/15/18
+                        </td>
+                        <td>
 
-                        </span>                 
-                    </td>  
-                    <td>   
-                        <span *ngIf="data.displayprice">                       
-                        {{ quitem.qty *( quitem.kd? quitem.price2 : quitem.price )  | currency}}
-                        </span>
-                    </td>
-    
+                        </td>
+                    </tr>
+
+                </table>
+
+                <br>
 
 
-               
-                <td>{{i}}</td>
-                </tr>
-            </tbody>
-            <tfoot><tr><td colspan="8" style="text-align:center"> Printing #123456</td></tr></tfoot>
-        </table>
 
-        <table>
-                <tr class="information"> 
-                        <td colspan="2"> 
-                      
-                        </td> 
-                </tr> 
-                    <tr class="heading" > 
-                        <td> 
-                        Class
-                        </td> 
-                        <td> 
-                        QTY 
-                        </td> 
-                    </tr> 
-                    <tr class="details"> 
-                        <td> 
-                        Cabinet
-                        </td> 
-                        <td> 
-                        {{data.summary.cabinet}} 
-                        </td> 
-                    </tr> 
-                    <tr class="details"> 
-                        <td> 
-                        Accessary
-                        </td> 
-                        <td> 
-                        {{data.summary.accessary}} 
-                        </td> 
-                    </tr> 
-                    <tr class="details"> 
-                        <td> 
-                        Others
-                        </td> 
-                        <td> 
-                        {{data.summary.others}} 
-                        </td> 
-                    </tr> 
-                    <tr class="details"> 
-                        <td> 
-                        Total Piece(s)
-                        </td> 
-                        <td> 
-                        {{data.summary.totalpiece}} 
-                        </td> 
-                    </tr> 
-        </table>
-        <table  *ngIf="data.displayprice">
-            <tr class="heading"> 
-                        <td> 
-                        Summary 
-                        </td> 
-                        <td> 
-                         
-                        </td> 
-            </tr> 
-            <tr class="item"> 
-                <td> 
-                Subtotal 
-                </td> 
-                <td> 
-                {{data.summary.subtotal | currency}}
-                </td> 
-            </tr> 
-            <tr class="item"> 
-                <td> 
-                Discount
-                </td> 
-                <td> 
-                {{data.summary.discount | currency}} 
-                </td> 
-            </tr>
-            <tr class="item"> 
-                <td> 
-                Sales Tax
-                </td> 
-                <td> 
-                {{data.summary.tax | currency}} 
-                </td> 
-            </tr>                      
+                <table class="table table-sm table-hover ">
+                    <thead class="thead-light">
+                        <tr>
 
-            <tr class="item last"> 
-                <td>Delivery Fee</td> 
-                <td> 
-                {{data.summary.deliveryfee | currency}}
-                </td> 
-            </tr>  
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Style </th>
+                            <th scope="col">ITEM</th>
+                            <th scope="col">L/R</th>
+                            <th scope="col">KD</th>
+                            <th scope="col">
+                                <span *ngIf="data.displayprice">PRICE</span>
+                            </th>
+                            <th scope="col">
+                                <span *ngIf="data.displayprice">
+                                    Amount
+                                </span>
+                            </th>
 
-            <tr class="total"> 
-                <td> 
-                Total
-                </td> 
-                <td> 
-                {{data.summary.total | currency}} 
-                </td> 
-            </tr> 
-                    
 
-        </table>
+                            <th scope="col">SEQU</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let quitem of data.entries | async ; let i=index" class="item">
+                            <td>
+                                {{quitem.qty}}
+                            </td>
+                            <td style="text-align:left">
+                                <span>{{quitem.stylecode}}</span>
+                            </td>
+                            <td><b>{{quitem.code}} </b></td>
+                            <td>
+                                <span *ngIf="quitem.rqside">
+                                    {{quitem.side |uppercase}}
+                                </span>
+                            </td>
 
-         
-        </div> <!--Class end-->  
-       
+                            <td>
+                                <span *ngIf="quitem.rqkd">
+                                    {{quitem.kd?'KD':'ASSM'}}
+                                </span>
+                            </td>
+                            <td>
+                                <span *ngIf="data.displayprice">
+                                    <b> {{(quitem.kd? quitem.price2 : quitem.price) | currency}}</b>
+
+                                </span>
+                            </td>
+                            <td>
+                                <span *ngIf="data.displayprice">
+                                    {{ quitem.qty *( quitem.kd? quitem.price2 : quitem.price ) | currency}}
+                                </span>
+                            </td>
+
+
+
+
+                            <td>{{i}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="8" style="text-align:center"> Printing #123456</td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <table>
+                    <tr>
+                        <td>
+                            <!--Quantity-->
+                            <table>
+
+                                <tr class="heading">
+                                    <td>
+                                        Class
+                                    </td>
+                                    <td>
+                                        QTY
+                                    </td>
+                                </tr>
+                                <tr class="details">
+                                    <td>
+                                        Cabinet
+                                    </td>
+                                    <td>
+                                        {{data.summary.cabinet}}
+                                    </td>
+                                </tr>
+                                <tr class="details">
+                                    <td>
+                                        Accessary
+                                    </td>
+                                    <td>
+                                        {{data.summary.accessary}}
+                                    </td>
+                                </tr>
+                                <tr class="details">
+                                    <td>
+                                        Others
+                                    </td>
+                                    <td>
+                                        {{data.summary.others}}
+                                    </td>
+                                </tr>
+                                <tr class="details">
+                                    <td>
+                                        Total Piece(s)
+                                    </td>
+                                    <td style="font-size:larger;">
+                                       <b> {{data.summary.totalpiece}}</b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <!--Quantity-->
+                        <td>
+                            <!--Total-->
+                            <table *ngIf="data.displayprice">
+                                <tr class="heading">
+                                    <td>
+                                        Summary
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                </tr>
+                                <tr class="item">
+                                    <td>
+                                        Subtotal
+                                    </td>
+                                    <td>
+                                        {{data.summary.subtotal | currency}}
+                                    </td>
+                                </tr>
+                                <tr class="item">
+                                    <td>
+                                        Discount
+                                    </td>
+                                    <td>
+                                        {{data.summary.discount | currency}}
+                                    </td>
+                                </tr>
+                                <tr class="item">
+                                    <td>
+                                        Sales Tax
+                                    </td>
+                                    <td>
+                                        {{data.summary.tax | currency}}
+                                    </td>
+                                </tr>
+
+                                <tr class="item last">
+                                    <td>Delivery Fee</td>
+                                    <td>
+                                        {{data.summary.deliveryfee | currency}}
+                                    </td>
+                                </tr>
+
+                                <tr class="total">
+                                    <td>
+                                        Total
+                                    </td>
+                                    <td style="font-size:larger;">
+                                        {{data.summary.total | currency}}
+                                    </td>
+                                </tr>
+
+
+                            </table>
+                        </td>
+                        <!--Total-->
+                    </tr>
+                </table>
+
+
+
+
+
+
+
+            </div>
+            <!--Class end-->
+
+
+        </div>
 
     </div>
 
-</div>
-
 </div> <!-- Print Section -->
 
-<div mat-dialog-actions 
-[style.visibility]="printing ? 'visible' : 'hidden'"
-style=" float:right; "
->
+<div mat-dialog-actions [style.visibility]="printing ? 'visible' : 'hidden'" style=" float:right; ">
 
-<button md-button cdkFocusInitial class="btn btn-sm  btn-outline-primary "  (click)="toPrint()">
-    Print
-</button>
-&nbsp;&nbsp;&nbsp;&nbsp;
+    <button md-button cdkFocusInitial class="btn btn-sm  btn-outline-primary " (click)="toPrint()">
+        Print
+    </button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
 
-<button class="btn btn-sm btn-outline-dark " (click)="onNoClick()">
-    Not Now
-</button>
+    <button class="btn btn-sm btn-dark " (click)="onNoClick()">
+        Not Now
+    </button>
 
 </div>
 
 <iframe #iframeprint frameborder="1" width="100%" height="50%" style=" position:absolute; top:-1000000px;"></iframe>
-  
-  
-  
-  
-  
