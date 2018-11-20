@@ -556,6 +556,7 @@ export interface PrintData {
   displayprice: boolean;
   entries: Observable<quotItem[]>;
   summary: quotItemSummary;
+  quotheader:quotHeader;
 }
 @Component({
   selector: 'app-quotitemprint',
