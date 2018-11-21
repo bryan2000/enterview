@@ -46,6 +46,7 @@ quoteitems: quotItem[]=[
   {
     addressid:'st1000',
     name:'Pickup',
+    companyname:'Home Improvements',
     address1:'241 59th ST   ',
     address2:'',
     city:'Brooklyn',
@@ -64,6 +65,7 @@ quoteitems: quotItem[]=[
   {
     addressid:'st1001',
     name:'Pick Up 2',
+    companyname:'Groups ',
     address1:'242 58th ST   ',
     address2:'',
     city:'Brooklyn',
@@ -81,6 +83,7 @@ quoteitems: quotItem[]=[
   {
     addressid:'st1002',
     name:'Store',
+    companyname:'ABC Kitchen',
     address1:'131-25 41th Avenue',
     address2:'',
     city:'Flushing',
@@ -98,6 +101,7 @@ quoteitems: quotItem[]=[
   {
     addressid:'st1003',
     name:'warehouse1',
+    companyname:'New Heights Kitchen and Bath Inc',
     address1:'41-20A College Point Blvd ',
     address2:'',
     city:'Flushing',
@@ -115,6 +119,7 @@ quoteitems: quotItem[]=[
   {
     addressid:'st1004',
     name:'warehourse2',
+    companyname:'Home Style Kitchen and Cabinet Inc',
     address1:'41-20B College Point Blvd ',
     address2:'',
     city:'Flushing',
