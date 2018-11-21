@@ -261,24 +261,35 @@ export class QuotitemComponent implements OnInit {
     });
 
     this.shippingaddresses = this.quotSVC.getAddresses();
+    this.loadQuot('9950');
+
     this.subtotal();
 
     //this.loadAddress(null);
     this.Addresschanged('st1000');
-
-    this.loadQuot('9950');
+    this.LoadVendorAddress('st1000');
+  
+  
 
   }
 
   public loadQuot(quotid: string): void {
     this.quotheader = {
-      quotid: '1',
+      quotid: 'qu1111',
+      vendorname:'Home Improvements',
+      vendornum:2233,
+      vendoraddressid:'st1000',
+      customernum:1002,
+      customername:'New Heights Kitchen',
+      shippingaddressid:'st1003',
       po: '9950',
       reference: '1997',
       etadate: new Date('12/10/2018'),
       quotdate: new Date('11/17/2018'),
       displayprice: true,
       fullkd: true,
+      crtstage:'pending',
+      printed:false,
     };
 
 
@@ -316,12 +327,22 @@ export class QuotitemComponent implements OnInit {
       data: {
         id: 'quo2it123',
         name: 'ABC',
-        descr: 'After You Click OK,  this item will be delete. Are you sure?',
+        descr: 'After You Click OK,  this page will be printed. Are you sure?',
         displayprice: this.quotheader.displayprice,
         entries: this.filteredQuoItems,
         summary: this.quotsummary,
+        quotheader: this.quotheader,
+        vendoraddress: this.vendoraddress,
+        shippingaddress:this.shippingaddresses,
       },
     });
+
+    dialogRef.afterClosed().subscribe(result=>{
+      if(result===true){
+        this.quotheader.printed=true;
+      }      
+    });
+
   }
 
 
@@ -379,7 +400,7 @@ export class QuotitemComponent implements OnInit {
 
 
   ///////////shipping address //// START ////////////////
-
+  companyname:string;
   addrname: string;
   address1: string;
   address2: string;
@@ -394,6 +415,7 @@ export class QuotitemComponent implements OnInit {
   addressmemo: string;
   freedeliveryamt: number = 0;
   deliveryfee: number = 0;
+  vendoraddress:addressInfo;
   currenshippingaddrs: addressInfo;
   shippingaddresses: Observable<addressInfo[]>;
   //newshippingaddrs:addressInfo;
@@ -406,6 +428,7 @@ export class QuotitemComponent implements OnInit {
   public loadAddress(addrs: addressInfo) {
 
     if (addrs) {
+      this.companyname=addrs.companyname
       this.addrname = addrs.name
       this.address1 = addrs.address1;
       this.address2 = addrs.address2;
@@ -422,6 +445,7 @@ export class QuotitemComponent implements OnInit {
       this.deliveryfee = addrs.deliveryfee;
 
     } else {
+      this.currenshippingaddrs.companyname=this.companyname;
       this.currenshippingaddrs.name = this.addrname;
       this.currenshippingaddrs.address1 = this.address1;
       this.currenshippingaddrs.address2 = this.address2;
@@ -450,11 +474,23 @@ export class QuotitemComponent implements OnInit {
       this.quotSVC.findAddress(addrid).subscribe(
         shipadd => {
           if (shipadd) {
-            this.currenshippingaddrs = shipadd;
+            this.updateCurrentAddress(shipadd);
             this.loadAddress(shipadd);
           }
         }
       );
+    }
+  }
+
+  LoadVendorAddress(addrid:string){
+    if(addrid){
+      this.quotSVC.findAddress(addrid).subscribe(
+        vndadd=>{
+          if(vndadd){
+            this.vendoraddress=vndadd;
+          }
+        }
+      )
     }
   }
 
@@ -471,6 +507,7 @@ export class QuotitemComponent implements OnInit {
     const newshippingaddrs: addressInfo = {
       addressid: '',
       name: this.addrname,
+      companyname:this.quotheader.customername,
       address1: this.address1,
       address2: this.address2,
       city: this.city,
@@ -485,7 +522,7 @@ export class QuotitemComponent implements OnInit {
       freedeliveryamt: this.freedeliveryamt,
       deliveryfee: this.deliveryfee,
     }
-    this.currenshippingaddrs = this.quotSVC.addAddress(newshippingaddrs);
+    this.updateCurrentAddress(this.quotSVC.addAddress(newshippingaddrs));
     this.EditMode(false);
     this.snackBar.open(this.currenshippingaddrs.name + ' Added!', 'Close',
       { duration: 4000, verticalPosition: 'top', panelClass: ['snackbaraddrs-new'], }
@@ -493,13 +530,19 @@ export class QuotitemComponent implements OnInit {
   }
 
 
+  updateCurrentAddress(addr:addressInfo){
+    this.currenshippingaddrs = addr;
+    
+    this.quotheader.shippingaddressid=this.currenshippingaddrs.addressid;    
+  }
+
   //////////////////////// Functions/////////////////////////////
 
 
   quotsummary: quotItemSummary = {
     cabinet: 0, //Piece
     accessary: 0, // piece
-    others: 0, // piece
+    others: 0,  // piece
     totalpiece: 0,//piece
 
     discount: 0,
@@ -557,6 +600,10 @@ export interface PrintData {
   entries: Observable<quotItem[]>;
   summary: quotItemSummary;
   quotheader:quotHeader;
+  vendoraddress:addressInfo;
+  shippingaddress:addressInfo;
+
+
 }
 @Component({
   selector: 'app-quotitemprint',
@@ -574,6 +621,7 @@ export class Quotitemprint {
   ) { }
   onNoClick(): void {
     this.dialogRef.close();
+    
   }
   toPrint() {
     this.printing = false;
@@ -581,7 +629,8 @@ export class Quotitemprint {
 
     setTimeout(() => {
       //   window.print();
-      this.printing = true;
+      // this.printing = true;
+      this.dialogRef.close(true);
     }, 500);
 
   }
