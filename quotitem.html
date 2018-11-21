@@ -5,15 +5,24 @@
 
 
     <div class="row">
-        <div class="col-md  bill">
+        <div class="col-md ">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">QU# {{quotheader.quotid}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Majestic (688)</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{{quotheader.vendorname}} ({{quotheader.vendornum}})</h6>
 
                     <p class="card-text">
-                        5901 Fort Hamilton <br>Brooklyn NY 11220 <br>
-                        Tel: 718-888-2838
+                        {{vendoraddress.address1}}&nbsp;&nbsp; {{vendoraddress.address2}}<br>
+                        {{vendoraddress.city}} {{vendoraddress.state}}
+                        {{vendoraddress.zipcode}} <br>
+                        Tel: {{vendoraddress.tel}} <br>
+                        Fax: {{vendoraddress.fax}}<br>
+                        Contact: <b> {{vendoraddress.contact}}</b>
+                        alt: &nbsp;&nbsp; {{vendoraddress.altphone}} <br>
+                        EMail: {{vendoraddress.email}}<br>
+                        Delivery Fee: {{vendoraddress.deliveryfee}}&nbsp;&nbsp; Free
+                        Amount:{{vendoraddress.freedeliveryamt}}<br>
+                        Memo: {{vendoraddress.addressmemo}}
                     </p>
                     <a href="#" class="card-link">Terms: Net 15 </a><br>
                     <a href="#" class="card-link">Discount For LO 2%</a><br>
@@ -25,17 +34,17 @@
 
 
 
-        <div class="col-md ship">
+        <div class="col-md ">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Ship To (5936) </h5>
+                    <h5 class="card-title">Ship To {{quotheader.customername}}({{quotheader.customernum}})  {{quotheader.shippingaddressid}}</h5>
                     <div *ngIf="!isAddresedit">
                         <div class="input-group ">
                             <select (change)="Addresschanged($event.target.value)" class="form-control select select-info mbl"
                                 #selectadd>
                                 <optgroup label="Ship To">
                                     <option *ngFor="let ship of shippingaddresses | async" value="{{ship.addressid}}"
-                                        [selected]="ship.addressid==currenshippingaddrs.addressid">{{ship.name}}</option>
+                                        [selected]="ship.addressid==currenshippingaddrs.addressid">{{ship.name}} </option>
                                 </optgroup>
                             </select>
 
@@ -44,6 +53,7 @@
                         <section onMouseOver="this.style.background='lightgray'; " onMouseOut="this.style.background='#fff'"
                             id="label" (click)="EditMode(true)" style="cursor: pointer;">
                             <p class="card-text">
+                                {{currenshippingaddrs.companyname}}<br>
                                 {{currenshippingaddrs.address1}}&nbsp;&nbsp; {{currenshippingaddrs.address2}}<br>
                                 {{currenshippingaddrs.city}} {{currenshippingaddrs.state}}
                                 {{currenshippingaddrs.zipcode}} <br>
@@ -188,8 +198,8 @@
                 class="btn btn-outline-success btn-sm">
                 <mat-icon>gavel</mat-icon> Assambled
             </button>
-            <button (click)="toPrint()" class=" btn btn-sm btn-outline-info">
-                <mat-icon>print</mat-icon> Print
+            <button (click)="toPrint()" class=" btn btn-sm   {{quotheader.printed ? 'btn-inf':'btn-outline-info' }}">
+                <mat-icon>print</mat-icon>  {{quotheader.printed ? 'Printed':'Print'}}
             </button>
         </div>
 
