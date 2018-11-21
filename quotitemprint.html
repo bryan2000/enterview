@@ -11,7 +11,7 @@
                                 <tr>
 
                                     <td>
-                                        <span class="headleft"><b>Pending</b> #9950</span><br>
+                                        <span class="headleft"><b>{{data.quotheader.crtstage}}</b> #{{data.quotheader.quotid}}</span><br>
 
                                         <b>
                                             Majestic<br>
@@ -45,11 +45,11 @@
                     </tr>
                     <tr class="item">
                         <td>
-                            ABC
+                            {{data.quotheader.po}}
                         </td>
 
                         <td>
-                            2019
+                            {{data.quotheader.reference}}
                         </td>
                     </tr>
                     <tr class="heading">
@@ -270,7 +270,7 @@
 
 <div mat-dialog-actions [style.visibility]="printing ? 'visible' : 'hidden'" style=" float:right; ">
 
-    <button md-button cdkFocusInitial class="btn btn-sm  btn-outline-primary " (click)="toPrint()">
+    <button md-button cdkFocusInitial  class="btn btn-sm  btn-outline-primary " (click)="toPrint()">
         Print
     </button>
     &nbsp;&nbsp;&nbsp;&nbsp;
