@@ -335,7 +335,7 @@ export class QuotitemComponent implements OnInit {
         summary: this.quotsummary,
         quotheader: this.quotheader,
         vendoraddress: this.vendoraddress,
-        shippingaddress:this.shippingaddresses,
+        currenshippingaddrs:this.currenshippingaddrs,
       },
     });
 
