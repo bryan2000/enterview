@@ -14,18 +14,21 @@
                                         <span class="headleft"><b>{{data.quotheader.crtstage}}</b> #{{data.quotheader.quotid}}</span><br>
 
                                         <b>
-                                            Majestic<br>
-                                            241 59 Street <br>
-                                            Brooklyn NY 11220<br>
-                                            TEL:718-833-8808<br>
-                                            FAX:718-853-5014
+                                            {{data.quotheader.vendorname}} ({{data.quotheader.vendornum}})<br>
+                                            {{data.vendoraddress.address1}}&nbsp;&nbsp; {{data.vendoraddress.address2}}<br>
+                                            {{data.vendoraddress.city}} {{data.vendoraddress.state}}
+                                            {{data.vendoraddress.zipcode}} <br>
+                                            Tel: {{data.vendoraddress.tel}} <br>
+                                            Fax: {{data.vendoraddress.fax}}<br>
                                         </b>
                                     </td>
                                     <td>
-                                        <b>King's Custom Cabinets Corp</b> <br>
-                                        130-06 Atlantic Avenue<br>
-                                        TEL:718-847-4424<br>
-                                        FAX:718-805-8572
+                                        <b> {{data.currenshippingaddrs.companyname}}</b> <br>
+                                        {{data.currenshippingaddrs.address1}}&nbsp;&nbsp; {{data.currenshippingaddrs.address2}}<br>
+                                        {{data.currenshippingaddrs.city}} {{data.currenshippingaddrs.state}}
+                                        {{data.currenshippingaddrs.zipcode}} <br>
+                                        Tel: {{data.currenshippingaddrs.tel}} <br>
+                                        Fax: {{data.currenshippingaddrs.fax}}<br>
 
                                     </td>
                                 </tr>
@@ -45,11 +48,11 @@
                     </tr>
                     <tr class="item">
                         <td>
-                            {{data.quotheader.po}}
+                            ABC
                         </td>
 
                         <td>
-                            {{data.quotheader.reference}}
+                            2019
                         </td>
                     </tr>
                     <tr class="heading">
@@ -270,7 +273,7 @@
 
 <div mat-dialog-actions [style.visibility]="printing ? 'visible' : 'hidden'" style=" float:right; ">
 
-    <button md-button cdkFocusInitial  class="btn btn-sm  btn-outline-primary " (click)="toPrint()">
+    <button md-button cdkFocusInitial class="btn btn-sm  btn-outline-primary " (click)="toPrint()">
         Print
     </button>
     &nbsp;&nbsp;&nbsp;&nbsp;
