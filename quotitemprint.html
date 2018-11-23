@@ -36,41 +36,42 @@
                             </table>
                         </td>
                     </tr>
-                    <tr class="heading">
+                     <tr class="heading">
                         <td>
                             PO
                         </td>
 
-                        <td>
-                            Reference
+                        <td>                            
+                            Date
                         </td>
 
                     </tr>
                     <tr class="item">
                         <td>
-                            ABC
+                            {{data.quotheader.po}}
                         </td>
 
                         <td>
-                            2019
+                            {{data.quotheader.quotdate | date:'MM/dd/yyyy'}}
+                           
                         </td>
                     </tr>
                     <tr class="heading">
 
                         <td>
-                            ETA Date
+                            Reference                           
                         </td>
                         <td>
-
+                             ETA
                         </td>
 
                     </tr>
                     <tr class="item">
                         <td>
-                            12/15/18
+                            {{data.quotheader.reference}}                           
                         </td>
                         <td>
-
+                            {{data.quotheader.etadate | date:'MM/dd/yyyy'}}
                         </td>
                     </tr>
 
