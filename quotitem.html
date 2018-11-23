@@ -156,8 +156,9 @@
 
 
         <mat-form-field class="col-md-6 ">
-            <mat-label>Quote Date</mat-label>
-            <input matInput [matDatepicker]="pickerquotdate" [(ngModel)]="quotheader.quotdate">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="pickerquotdate"
+             [formControl]="dateControl" (change)="quotdateChange()">
             <mat-datepicker-toggle matSuffix [for]="pickerquotdate"></mat-datepicker-toggle>
             <mat-datepicker #pickerquotdate></mat-datepicker>
         </mat-form-field>
@@ -174,7 +175,8 @@
 
         <mat-form-field class="col-md-6">
             <mat-label>ETA Date</mat-label>
-            <input matInput [matDatepicker]="pickeretadate" [(ngModel)]="quotheader.etadate">
+            <input matInput [matDatepicker]="pickeretadate"
+            [formControl]="etadateControl" (change)="etadateChange()">
             <mat-datepicker-toggle matSuffix [for]="pickeretadate"></mat-datepicker-toggle>
             <mat-datepicker #pickeretadate></mat-datepicker>
         </mat-form-field>
