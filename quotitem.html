@@ -8,7 +8,7 @@
         <div class="col-md ">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">QU# {{quotheader.quotid}}</h5>
+                    <h5 class="card-title">{{quotheader.crtstage}} QU# {{quotheader.quotid}}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{quotheader.vendorname}} ({{quotheader.vendornum}})</h6>
 
                     <p class="card-text">
@@ -24,9 +24,9 @@
                         Amount:{{vendoraddress.freedeliveryamt}}<br>
                         Memo: {{vendoraddress.addressmemo}}
                     </p>
-                    <a href="#" class="card-link">Terms: Net 15 </a><br>
-                    <a href="#" class="card-link">Discount For LO 2%</a><br>
-                    <a href="#" class="card-link">Delivery Fee $35 Under $500</a>
+                    <span class="text-primary">Terms: Net {{quotheader.termsnet}} </span><br>
+                    <span class="text-primary">Discount {{quotheader.discount}} %</span><br>
+                    
 
                 </div>
             </div>
@@ -62,11 +62,11 @@
                                 Contact: <b> {{currenshippingaddrs.contact}}</b>
                                 alt: &nbsp;&nbsp; {{currenshippingaddrs.altphone}} <br>
                                 EMail: {{currenshippingaddrs.email}}<br>
-                                Delivery Fee: {{currenshippingaddrs.deliveryfee}}&nbsp;&nbsp; Free
-                                Amount:{{currenshippingaddrs.freedeliveryamt}}<br>
                                 Memo: {{currenshippingaddrs.addressmemo}}
                             </p>
-
+                                <span class="text-primary"> Delivery Fee: {{currenshippingaddrs.deliveryfee | currency}}&nbsp;&nbsp; 
+                                Under Amount:{{currenshippingaddrs.freedeliveryamt | currency}}
+                                </span>
                         </section>
                     </div>
 
@@ -156,9 +156,9 @@
 
 
         <mat-form-field class="col-md-6 ">
-            <mat-label>Date</mat-label>
-            <input matInput [matDatepicker]="pickerquotdate"
-             [formControl]="dateControl" (change)="quotdateChange()">
+            <mat-label>Quote Date</mat-label>
+            <input matInput [matDatepicker]="pickerquotdate" 
+            [formControl]="dateControl" (change)="quotdateChange()">
             <mat-datepicker-toggle matSuffix [for]="pickerquotdate"></mat-datepicker-toggle>
             <mat-datepicker #pickerquotdate></mat-datepicker>
         </mat-form-field>
@@ -175,7 +175,7 @@
 
         <mat-form-field class="col-md-6">
             <mat-label>ETA Date</mat-label>
-            <input matInput [matDatepicker]="pickeretadate"
+            <input matInput [matDatepicker]="pickeretadate" 
             [formControl]="etadateControl" (change)="etadateChange()">
             <mat-datepicker-toggle matSuffix [for]="pickeretadate"></mat-datepicker-toggle>
             <mat-datepicker #pickeretadate></mat-datepicker>
@@ -193,14 +193,14 @@
         <div class="col-md-6">
             <img *ngIf="selectedstyle" height="35" style="padding:5px;" [src]="selectedstyle.img">
             <mat-checkbox [(ngModel)]="quotheader.displayprice">Display Price </mat-checkbox> &nbsp;&nbsp;&nbsp;
-            <button matTooltip="Change All to KD" value=" KD" (click)="kdAssambled(true)" type="button" class="btn btn-outline-secondary btn-sm">
-                <mat-icon md-18>inbox</mat-icon> KD
+            <button (click)="kdAssambled(true)" type="button" class="btn btn-outline-secondary btn-sm">
+                <mat-icon md-18>inbox</mat-icon> KD All
             </button>
-            <button matTooltip="Change All to Assambled" value="Assambled" (click)="kdAssambled(false)" type="button"
+            <button   (click)="kdAssambled(false)" type="button"
                 class="btn btn-outline-success btn-sm">
-                <mat-icon>gavel</mat-icon> Assambled
+                <mat-icon>gavel</mat-icon> Assambled All
             </button>
-            <button (click)="toPrint()" class=" btn btn-sm   {{quotheader.printed ? 'btn-inf':'btn-outline-info' }}">
+            <button (click)="toPrint()" class=" btn btn-sm   {{quotheader.printed ? 'btn-info':'btn-outline-info' }}">
                 <mat-icon>print</mat-icon>  {{quotheader.printed ? 'Printed':'Print'}}
             </button>
         </div>
