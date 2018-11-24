@@ -302,6 +302,8 @@ export class QuotitemComponent implements OnInit {
       fullkd: true,
       crtstage: 'pending',
       printed: false,
+       termsnet:25,
+      discount:5,
     };
 
 
